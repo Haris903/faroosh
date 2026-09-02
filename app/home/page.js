@@ -147,7 +147,7 @@ const honeyJar = "/prod-honey.jpg";
 /* 3. BRAND DATA & CONTENT                                            */
 /* ------------------------------------------------------------------ */
 const NAV_LINKS = [
-  { label: "Story",href: "#story" },
+  { label: "Story", href: "#story" },
   { label: "Products", href: "#products" },
   { label: "Contact", href: "#contact" },
 ];
@@ -284,12 +284,11 @@ function Header({ cartCount, onCartClick }) {
       initial={false}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.9, ease: EASE }}
-      className={`glass-nav fixed inset-x-0 top-0 z-[99999] isolate transition-all duration-500 ${
-        scrolled ? "py-3" : "py-4"
-      }`}
+      className={`glass-nav fixed inset-x-0 top-0 z-[99999] isolate transition-all duration-500 ${scrolled ? "py-3" : "py-4"
+        }`}
     >
       <div className="mx-auto grid w-full max-w-[1600px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 md:px-10">
-        
+
         <div className="flex items-center gap-4">
           <button
             type="button"
@@ -436,7 +435,7 @@ function Header({ cartCount, onCartClick }) {
 
 function CartDrawer({ open, onClose, items }) {
   return (
-<AnimatePresence>
+    <AnimatePresence>
       {open && (
         <>
           <motion.div
@@ -462,11 +461,11 @@ function CartDrawer({ open, onClose, items }) {
                 <ShoppingBag size={18} className="text-[#E11D48]" />
                 <span className="eyebrow f-muted text-xs font-bold tracking-[0.2em] uppercase">Your Basket Selection</span>
               </div>
-              <button 
-                type="button" 
-                onClick={onClose} 
+              <button
+                type="button"
+                onClick={onClose}
                 aria-label="Close cart"
-                className="p-2 rounded-full hover:bg-[#FDE68A]/30 transition-colors text-[#3B110B]"
+                className="p-2 rounded-full cursor-pointer hover:bg-[#FDE68A]/30 transition-colors text-[#3B110B]"
               >
                 <X size={20} strokeWidth={1.5} />
               </button>
@@ -480,7 +479,7 @@ function CartDrawer({ open, onClose, items }) {
                   <div className="p-4 rounded-full bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] border border-[#F59E0B]/40 text-[#E11D48] shadow-md">
                     <Sparkles size={28} />
                   </div>
-                  
+
                   <div className="space-y-1.5">
                     <span className="eyebrow uppercase tracking-[0.25em] text-[#D97706] text-[0.7rem] font-bold">
                       Faroosh Farms
@@ -490,10 +489,10 @@ function CartDrawer({ open, onClose, items }) {
                     </h3>
                   </div>
 
-                  <p className="f-muted text-sm md:text-base font-jakarta font-medium 2xl:font-bold max-w-[280px] mx-auto leading-relaxed text-[#5F2113]/80">
+                  <p className="f-muted text-sm md:text-base font-jakarta font-medium max-w-[280px] mx-auto leading-relaxed text-[#5F2113]/80">
                     Our direct artisan checkout experience is launching shortly. Stay tuned for farm-fresh deliveries.
                   </p>
-                </div>             
+                </div>
               ) : (
                 <ul className="flex flex-col gap-4">
                   {items.map((item, i) => (
@@ -510,8 +509,8 @@ function CartDrawer({ open, onClose, items }) {
             </div>
 
             <div className="pt-4 mt-auto">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="w-full py-4 rounded-full bg-gradient-to-r from-[#E11D48] via-[#EA580C] to-[#D97706] text-white font-medium text-sm tracking-wider uppercase shadow-lg shadow-[#E11D48]/20 hover:opacity-95 transition-all flex items-center justify-center gap-2"
               >
                 Proceed to Checkout
@@ -549,7 +548,7 @@ function Hero() {
   };
 
   return (
-    <section id="home" className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden pt-20">
+    <section id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20">
       <motion.div
         initial={{ scale: 1.15, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -599,7 +598,12 @@ function Hero() {
             href="#products"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="pill-light inline-flex touch-manipulation"
+            style={{
+              backfaceVisibility: "hidden",
+              WebkitFontSmoothing: "subpixel-antialiased",
+              willChange: "transform",
+            }}
+            className="pill-light font-medium font-jakarta transform-gpu"
           >
             Explore Harvest
             <ArrowUpRight size={15} strokeWidth={1.8} />
@@ -647,7 +651,7 @@ function FarmsStory() {
   const scale = useTransform(scrollYProgress, [0, 1], [1.15, 1]);
 
   return (
-    <section id="farms" ref={ref} className="f-bg relative overflow-hidden px-6 py-28 md:px-12 md:py-36">
+    <section id="farms" ref={ref} className="f-bg relative overflow-hidden px-6 py-8 md:px-12 md:py-10">
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -686,7 +690,7 @@ function FarmsStory() {
 
           <motion.figure variants={rise} className="overflow-hidden md:col-span-5 rounded-xl">
             <motion.div style={{ y: y2 }} className="relative h-[37vh] w-full">
-               <Image src={honeycomb} alt="Raw Honeycomb" fill className="object-cover" />
+              <Image src={honeycomb} alt="Raw Honeycomb" fill className="object-cover" />
             </motion.div>
           </motion.figure>
 
@@ -734,7 +738,7 @@ function FarmsStory() {
 /* ------------------------------------------------------------------ */
 function ProcessSection() {
   return (
-    <section className="f-sec f-border border-b border-t px-6 py-24 md:px-12">
+    <section className="f-sec f-border border-b border-t px-6 py-8 md:px-12 md:py-10">
       <div className="mx-auto max-w-[1400px]">
         <div className="max-w-xl">
           <span className="eyebrow f-accent">From Source to Doorstep</span>
@@ -793,7 +797,7 @@ function FarmStorytellingSection() {
   ];
 
   return (
-    <section className="f-bg f-border border-b px-6 py-28 md:px-12 md:py-36">
+    <section className="f-bg f-border border-b px-6 py-10 md:px-12 md:py-14">
       <div className="mx-auto max-w-[1400px]">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -826,11 +830,10 @@ function FarmStorytellingSection() {
                   onClick={() => setActiveStory(idx)}
                   whileHover={{ x: 4 }}
                   transition={{ duration: 0.3 }}
-                className={`group relative flex flex-col rounded-sm border p-6 text-left transition-all touch-manipulation cursor-pointer ${
-                isActive
-                  ? " bg-gradient-to-r from-amber-50 via-yellow-100/60 to-orange-50 shadow-lg border border-amber-200/80 f-border shadow-sm"
-                  : "border-transparent opacity-60 hover:opacity-100"
-              }`}
+                  className={`group relative flex flex-col rounded-sm border p-6 text-left transition-all touch-manipulation cursor-pointer ${isActive
+                      ? " bg-gradient-to-r from-amber-50 via-yellow-100/60 to-orange-50 shadow-lg border border-amber-200/80 f-border shadow-sm"
+                      : "border-transparent opacity-60 hover:opacity-100"
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="eyebrow f-accent">{story.tag}</span>
@@ -880,12 +883,12 @@ function FarmStorytellingSection() {
                   </div>
                 </div>
 
-               <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between border-t border-stone-200 pt-6">
-  <span className="eyebrow f-muted">Guaranteed Single-Origin</span>
-  <a href="#products" className="eyebrow f-ink border-b border-black pb-0.5 font-bold transition-opacity hover:opacity-70">
-    {STORIES[activeStory].linkText}
-  </a>
-</div>
+                <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between border-t border-stone-200 pt-6">
+                  <span className="eyebrow f-muted">Guaranteed Single-Origin</span>
+                  <a href="#products" className="eyebrow f-ink border-b border-black pb-0.5 font-bold transition-opacity hover:opacity-70">
+                    {STORIES[activeStory].linkText}
+                  </a>
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -933,7 +936,7 @@ function OfferingCard({ item }) {
         <div className="flex items-baseline gap-2">
           <p className="eyebrow f-muted text-xs font-semibold">{item.spec}</p>
         </div>
-        
+
         <h3 className="f-display mt-3 text-2xl font-normal leading-tight">{item.title}</h3>
         <p className="f-muted mt-2.5 text-sm font-normal leading-relaxed">{item.blurb}</p>
       </div>
@@ -958,7 +961,7 @@ function FeatureGrid({ onAdd }) {
   };
 
   return (
-    <section id="products" className="f-bg relative overflow-hidden px-6 py-28 md:px-12 md:py-36">
+    <section id="products" className="f-bg relative overflow-hidden px-6 py-10 md:px-12 md:py-14">
       <style>{`
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -1023,31 +1026,31 @@ function FeatureGrid({ onAdd }) {
         <div className="rule-gold my-12" />
 
         <div className="relative group -mx-4 px-4 sm:mx-0 sm:px-0">
-          <button 
+          <button
             type="button"
             onClick={() => scroll("left")}
             aria-label="Scroll left"
             className="absolute -left-5 top-1/2 -translate-y-1/2 z-30 hidden md:flex h-12 w-12 items-center justify-center rounded-full bg-white text-stone-800 shadow-[0_4px_20px_rgba(0,0,0,0.18)] border border-amber-100 opacity-0 transition-all duration-300 group-hover:opacity-100 hover:scale-110 hover:bg-stone-50 cursor-pointer touch-manipulation"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m15 18-6-6 6-6"/>
+              <path d="m15 18-6-6 6-6" />
             </svg>
           </button>
 
-          <button 
+          <button
             type="button"
             onClick={() => scroll("right")}
             aria-label="Scroll right"
             className="absolute -right-5 top-1/2 -translate-y-1/2 z-30 hidden md:flex h-12 w-12 items-center justify-center rounded-full bg-white text-stone-800 shadow-[0_4px_20px_rgba(0,0,0,0.18)] border border-amber-100 opacity-0 transition-all duration-300 group-hover:opacity-100 hover:scale-110 hover:bg-stone-50 cursor-pointer touch-manipulation"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m9 18 6-6-6-6"/>
+              <path d="m9 18 6-6-6-6" />
             </svg>
           </button>
 
-          <motion.div 
+          <motion.div
             ref={scrollContainerRef}
-            layout 
+            layout
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 pt-4 scroll-smooth"
           >
             <AnimatePresence mode="popLayout">
@@ -1069,7 +1072,7 @@ function FeatureGrid({ onAdd }) {
 /* ------------------------------------------------------------------ */
 function CustomerReviewsComponent() {
   return (
-    <section className="f-sec f-border border-b border-t px-6 py-24 md:px-12">
+    <section className="f-sec f-border border-b border-t px-6 py-10 md:px-12 md:py-14">
       <div className="mx-auto max-w-[1400px]">
         <div className="text-center">
           <span className="eyebrow f-accent">Trusted Across Homes</span>
@@ -1105,7 +1108,7 @@ function CustomerReviewsComponent() {
 /* ------------------------------------------------------------------ */
 function Footer() {
   return (
-    <footer id="contact" className="f-sec f-border border-t px-6 py-20 md:px-12">
+    <footer id="contact" className="f-sec f-border border-t px-6 py-10 md:px-12 md:py-12">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -1114,24 +1117,24 @@ function Footer() {
         className="mx-auto grid max-w-[1400px] gap-14 md:grid-cols-3"
       >
         <div>
-      <div>
-      <div className="bg-[#FAE7AC] flex flex-col justify-center items-center rounded-full w-24 h-24">
-        <Image 
-          src="/faroosh.png" 
-          alt="Faroosh Logo" 
-          width={32}
-          height={32}
-          className="object-contain" 
-        />
-        <span className="text-[#CAA387] font-bold text-[11px] mt-1 tracking-tight">
-          Faroosh.pk
-        </span>
-      </div>
+          <div>
+            <div className="bg-[#FAE7AC] flex flex-col justify-center items-center rounded-full w-24 h-24">
+              <Image
+                src="/faroosh.png"
+                alt="Faroosh Logo"
+                width={32}
+                height={32}
+                className="object-contain"
+              />
+              <span className="text-[#CAA387] font-bold text-[11px] mt-1 tracking-tight">
+                Faroosh.pk
+              </span>
+            </div>
 
-      <p className="f-muted mt-6 max-w-xs text-sm font-normal leading-relaxed">
-        Pure organic harvest from the Potohar plateau, Gilgit valleys, and Hunza terraces delivered straight to your home.
-      </p>
-    </div>
+            <p className="f-muted mt-6 max-w-xs text-sm font-normal leading-relaxed">
+              Pure organic harvest from the Potohar plateau, Gilgit valleys, and Hunza terraces delivered straight to your home.
+            </p>
+          </div>
         </div>
         <nav className="flex flex-col gap-3.5">
           <span className="eyebrow f-muted">Navigation</span>
@@ -1181,19 +1184,19 @@ export default function FarooshSinglePage() {
       // Sirf un links ko target karega jin me '#' hai (e.g., href="#products")
       const link = e.target.closest('a[href^="#"]');
       if (!link) return;
-      
+
       const targetId = link.getAttribute('href');
       if (targetId === '#') return;
-      
+
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
         e.preventDefault();
-        
+
         // Header overlapping se bachne ke liye 85px ka margin offset
-        const headerOffset = 85; 
+        const headerOffset = 85;
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.scrollY - headerOffset;
-  
+
         window.scrollTo({
           top: offsetPosition,
           behavior: "smooth"
@@ -1223,9 +1226,9 @@ export default function FarooshSinglePage() {
         <FarmStorytellingSection />
         <FeatureGrid onAdd={addToCart} />
         <CustomerReviews />
-        
-        <section id="story" className="f-bg px-6 pb-10 md:px-12">
-          <div className="mx-auto max-w-[900px] py-24 text-center">
+
+        <section id="story" className="f-bg px-6 pb-6 md:px-12">
+          <div className="mx-auto max-w-[900px] py-14 text-center">
             <span className="eyebrow f-muted">Our Purpose</span>
             <p className=" f-display mt-8 text-[clamp(1.8rem,3.4vw,2.9rem)] font-normal leading-[1.28]">
               Faroosh began with a single apricot orchard in the mountains. Today it stands as a bridge connecting Pakistan's richest organic harvest straight to your family home.
