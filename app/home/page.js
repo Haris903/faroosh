@@ -1,6 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from "react";
+import dynamic from 'next/dynamic';
+
+// CustomerReviews ko dynamically import karein
+const CustomerReviews = dynamic(() => Promise.resolve(CustomerReviewsComponent), {
+  loading: () => <p className="text-center py-12 f-muted">Loading reviews...</p>,
+  ssr: false,
+});
+
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -1100,7 +1108,7 @@ function FeatureGrid({ onAdd }) {
 /* ------------------------------------------------------------------ */
 /* 11. REVIEWS / TESTIMONIALS SECTION                                 */
 /* ------------------------------------------------------------------ */
-function CustomerReviews() {
+function CustomerReviewsComponent() {
   return (
     <section className="f-sec f-border border-b border-t px-6 py-24 md:px-12">
       <div className="mx-auto max-w-[1400px]">
