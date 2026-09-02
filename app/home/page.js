@@ -443,17 +443,20 @@ function CartDrawer({ open, onClose, items }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 z-[100000] backdrop-blur-md bg-[#3B110B]/40 cursor-pointer"
+            className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm"
+            style={{ willChange: "opacity" }}
           />
 
-          {/* Drawer / Modal Container - Animated Sliding Up from Bottom */}
+          {/* Drawer Container - Optimized with hardware acceleration */}
           <motion.div
-            initial={{ opacity: 0, y: "100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-x-0 bottom-0 z-[100001] mx-auto w-full max-w-lg rounded-t-[2.5rem] md:rounded-3xl md:bottom-auto md:top-1/2 md:-translate-y-1/2 f-bg p-6 md:p-8 shadow-2xl border border-[#F59E0B]/30 bg-[#FFFDF5] text-[#3B110B] max-h-[85vh] flex flex-col"
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", stiffness: 350, damping: 35, mass: 0.8 }}
+            style={{ willChange: "transform" }}
+            className="fixed inset-x-0 bottom-0 z-[70] mx-auto w-full max-w-lg rounded-t-[2.5rem] md:rounded-3xl md:bottom-auto md:top-1/2 md:-translate-y-1/2 f-bg p-6 md:p-8 shadow-2xl border border-[#F59E0B]/30 bg-[#FFFDF5] text-[#3B110B] max-h-[85vh] flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between">
@@ -465,7 +468,7 @@ function CartDrawer({ open, onClose, items }) {
                 type="button" 
                 onClick={onClose} 
                 aria-label="Close cart"
-                className="p-2 cursor-pointer touch-manipulation rounded-full hover:bg-[#FDE68A]/30 transition-colors text-[#3B110B]"
+                className="p-2 rounded-full hover:bg-[#FDE68A]/30 transition-colors text-[#3B110B]"
               >
                 <X size={20} strokeWidth={1.5} />
               </button>
@@ -476,46 +479,34 @@ function CartDrawer({ open, onClose, items }) {
             {/* Content Area */}
             <div className="flex-1 overflow-y-auto py-2">
               {items.length === 0 ? (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col items-center justify-center text-center py-10 px-4 space-y-4"
-                >
-                  <motion.div 
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                    className="p-4 rounded-full bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] border border-[#F59E0B]/40 text-[#E11D48] shadow-md"
-                  >
+                <div className="flex flex-col items-center justify-center text-center py-10 px-4 space-y-4">
+                  <div className="p-4 rounded-full bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] border border-[#F59E0B]/40 text-[#E11D48] shadow-md">
                     <Sparkles size={28} />
-                  </motion.div>
+                  </div>
                   
                   <div className="space-y-1.5">
                     <span className="eyebrow uppercase tracking-[0.25em] text-[#D97706] text-[0.7rem] font-bold">
-                      Faroosh Farms
+                      Faroosh Skardu
                     </span>
-                    <h3 className="font-jakarta text-3xl md:text-4xl font-bold tracking-tight text-[#3B110B]">
+                    <h3 className="f-display text-3xl md:text-4xl font-normal tracking-tight text-[#3B110B]">
                       Coming Soon
                     </h3>
                   </div>
 
-                  <p className="f-muted text-sm md:text-base font-jakarta font-normal max-w-[280px] mx-auto leading-relaxed text-[#5F2113]/80">
+                  <p className="f-muted text-sm md:text-base font-jakarta font-bold max-w-[280px] mx-auto leading-relaxed text-[#5F2113]/80">
                     Our direct artisan checkout experience is launching shortly. Stay tuned for farm-fresh deliveries.
                   </p>
-                </motion.div>
+                </div>
               ) : (
                 <ul className="flex flex-col gap-4">
                   {items.map((item, i) => (
-                    <motion.li
+                    <li
                       key={`${item}-${i}`}
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.05 }}
                       className="f-border flex items-baseline justify-between gap-4 border-b border-[#FDE68A] pb-4"
                     >
                       <span className="f-display text-xl md:text-2xl font-medium text-[#3B110B]">{item}</span>
                       <span className="eyebrow f-muted text-xs">Qty: 01</span>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               )}
@@ -525,7 +516,7 @@ function CartDrawer({ open, onClose, items }) {
             <div className="pt-4 mt-auto">
               <button 
                 type="button" 
-                className="w-full py-4 rounded-full bg-gradient-to-r from-[#E11D48] via-[#EA580C] to-[#D97706] text-white font-medium text-sm tracking-wider uppercase shadow-lg shadow-[#E11D48]/20 hover:opacity-95 transition-all flex items-center justify-center gap-2 touch-manipulation cursor-pointer"
+                className="w-full py-4 rounded-full bg-gradient-to-r from-[#E11D48] via-[#EA580C] to-[#D97706] text-white font-medium text-sm tracking-wider uppercase shadow-lg shadow-[#E11D48]/20 hover:opacity-95 transition-all flex items-center justify-center gap-2"
               >
                 Proceed to Checkout
               </button>
