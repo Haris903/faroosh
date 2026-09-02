@@ -701,7 +701,7 @@ function FarmsStory() {
             <p className="f-display text-[clamp(1.6rem,2.2vw,2.2rem)] font-normal leading-snug">
               “We do not chase commercial yield. We wait for the soil and the climate to bring the fruit to its peak natural flavor.”
             </p>
-            <footer className="eyebrow f-muted mt-8 font-semibold">Ghulam Faroosh · Third Generation Producer</footer>
+           <footer className="eyebrow f-muted mt-6 font-semibold whitespace-normal">Ghulam Faroosh · Third Generation Producer</footer>
           </motion.blockquote>
 
           <motion.figure variants={rise} className="overflow-hidden md:col-span-5 rounded-xl">
