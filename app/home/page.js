@@ -701,7 +701,9 @@ function FarmsStory() {
             <p className="f-display text-[clamp(1.6rem,2.2vw,2.2rem)] font-normal leading-snug">
               “We do not chase commercial yield. We wait for the soil and the climate to bring the fruit to its peak natural flavor.”
             </p>
-           <footer className="eyebrow f-muted mt-6 font-semibold whitespace-normal">Ghulam Faroosh · Third Generation Producer</footer>
+            <footer className="eyebrow f-muted mt-6 font-semibold !whitespace-normal break-words text-[11px] tracking-normal sm:text-xs sm:tracking-widest">
+              Ghulam Faroosh · Third Generation Producer
+            </footer>
           </motion.blockquote>
 
           <motion.figure variants={rise} className="overflow-hidden md:col-span-5 rounded-xl">
@@ -831,8 +833,8 @@ function FarmStorytellingSection() {
                   whileHover={{ x: 4 }}
                   transition={{ duration: 0.3 }}
                   className={`group relative flex flex-col rounded-sm border p-6 text-left transition-all touch-manipulation cursor-pointer ${isActive
-                      ? " bg-gradient-to-r from-amber-50 via-yellow-100/60 to-orange-50 shadow-lg border border-amber-200/80 f-border shadow-sm"
-                      : "border-transparent opacity-60 hover:opacity-100"
+                    ? " bg-gradient-to-r from-amber-50 via-yellow-100/60 to-orange-50 shadow-lg border border-amber-200/80 f-border shadow-sm"
+                    : "border-transparent opacity-60 hover:opacity-100"
                     }`}
                 >
                   <div className="flex items-center justify-between">
