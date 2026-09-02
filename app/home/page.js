@@ -2,15 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from 'next/dynamic';
-
-// CustomerReviews ko dynamically import karein
-const CustomerReviews = dynamic(() => Promise.resolve(CustomerReviewsComponent), {
-  loading: () => <p className="text-center py-12 f-muted">Loading reviews...</p>,
-  ssr: false,
-});
-
 import Link from "next/link";
 import Image from "next/image";
+import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import {
   motion,
   AnimatePresence,
@@ -39,16 +33,33 @@ import {
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
-/* 1. IMAGE PLACEHOLDERS & PATHS                                      */
+/* 0. NEXT.JS FONT OPTIMIZATION (Zero Layout Shift)                   */
 /* ------------------------------------------------------------------ */
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+// CustomerReviews ko dynamically import karein
+const CustomerReviews = dynamic(() => Promise.resolve(CustomerReviewsComponent), {
+  loading: () => <p className="text-center py-12 f-muted">Loading reviews...</p>,
+  ssr: false,
+});
 
 
 /* ------------------------------------------------------------------ */
-/* 2. DESIGN & TYPOGRAPHY SYSTEM STYLES                               */
+/* 2. DESIGN & TYPOGRAPHY SYSTEM STYLES (Removed @import for Speed)   */
 /* ------------------------------------------------------------------ */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
 html {
   scroll-behavior: smooth !important;
 }
@@ -61,8 +72,6 @@ html {
   --secondary: oklch(0.96 0.01 85);
   --muted-fg: oklch(0.45 0.02 60);
   --border: oklch(0.89 0.01 80);
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Plus Jakarta Sans", -apple-system, sans-serif;
   background: var(--ivory);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -133,7 +142,7 @@ const honeycomb = "/farms-honey.jpg";
 const dryFruit = "/farms-dryfruit.jpg";
 const peanuts = "/prod-peanuts.jpg";
 const honeyJar = "/prod-honey.jpg";
-// const seasonal=["/mangoes.png", "/apples.png","/plums.png","/cherry.png"];
+
 /* ------------------------------------------------------------------ */
 /* 3. BRAND DATA & CONTENT                                            */
 /* ------------------------------------------------------------------ */
@@ -186,8 +195,6 @@ const OFFERINGS = [
     blurb: "100% pure wild honeycomb lifted directly from high-altitude frames. Rich in natural propolis and floral wax.",
     image: honeycomb,
   },
-
-  // Sub se short tariqa (.map automated list):
   ...[
     { id: "mangoes", title: "Fresh Farm Mangoes", img: "/mangoes.png", price: "PKR 1,500" },
     { id: "apples", title: "Organic Swat Apples", img: "/apples.png", price: "PKR 1,200" },
@@ -252,7 +259,6 @@ const ANNOUNCEMENTS = [
   "Free Shipping Across Pakistan on Orders Over 3,000 PKR",
 ];
 
-// 2. Exact Header Component to Replace
 function Header({ cartCount, onCartClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -284,7 +290,6 @@ function Header({ cartCount, onCartClick }) {
     >
       <div className="mx-auto grid w-full max-w-[1600px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 md:px-10">
         
-        {/* LEFT: LOGO */}
         <div className="flex items-center gap-4">
           <button
             type="button"
@@ -297,13 +302,12 @@ function Header({ cartCount, onCartClick }) {
 
           <a href="/" className="text-left leading-none">
             <div className="img flex flex-col h-full items-center text-center">
-              <img width={30} height={30} src="/faroosh.png" alt="Faroosh Logo" />
+              <Image width={30} height={30} src="/faroosh.png" alt="Faroosh Logo" />
               <p className="text-[#CAA387]">Faroosh.pk</p>
             </div>
           </a>
         </div>
 
-        {/* CENTER: TICKER */}
         <div className="hidden justify-center md:flex">
           <div className="f-sec f-border flex items-center gap-3 rounded-full border px-4 py-1.5 shadow-sm">
             <span className="relative flex h-2 w-2 flex-shrink-0">
@@ -333,7 +337,6 @@ function Header({ cartCount, onCartClick }) {
           </div>
         </div>
 
-        {/* RIGHT: NAV LINKS */}
         <div className="flex items-center justify-end gap-5 md:gap-7">
           <nav className="hidden items-center gap-7 lg:flex">
             {NAV_LINKS.map((link) => (
@@ -354,7 +357,6 @@ function Header({ cartCount, onCartClick }) {
               onClick={() => setSearchOpen((v) => !v)}
               className="transition-transform duration-300 hover:scale-110 cursor-pointer touch-manipulation"
             >
-              {/* <Search size={19} strokeWidth={1.5} /> */}
             </button>
             <button type="button" aria-label="Account" className="hidden hover:scale-110 sm:block cursor-pointer touch-manipulation">
               <User size={19} strokeWidth={1.5} />
@@ -385,7 +387,6 @@ function Header({ cartCount, onCartClick }) {
         </div>
       </div>
 
-      {/* SEARCH BAR DROPDOWN */}
       <AnimatePresence>
         {searchOpen && (
           <motion.div
@@ -406,14 +407,13 @@ function Header({ cartCount, onCartClick }) {
         )}
       </AnimatePresence>
 
-      {/* MOBILE MENU DROPDOWN */}
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden bg-white/95 lg:hidden"
+            className="overflow-hidden bg-white/95 lg:hidden mt-2"
           >
             <div className="flex flex-col gap-5 px-6 pb-8 pt-6">
               {NAV_LINKS.map((link) => (
@@ -433,12 +433,12 @@ function Header({ cartCount, onCartClick }) {
     </motion.header>
   );
 }
+
 function CartDrawer({ open, onClose, items }) {
   return (
 <AnimatePresence>
       {open && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -449,16 +449,14 @@ function CartDrawer({ open, onClose, items }) {
             style={{ willChange: "opacity" }}
           />
 
-          {/* Drawer Container - Optimized with hardware acceleration */}
           <motion.div
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
-            exit={{ y: "100%" }}
+            exit={{ y: "130%" }}
             transition={{ type: "spring", stiffness: 350, damping: 35, mass: 0.8 }}
             style={{ willChange: "transform" }}
-            className="fixed inset-x-0 bottom-0 z-[70] mx-auto w-full max-w-lg rounded-t-[2.5rem] md:rounded-3xl md:bottom-auto md:top-1/2 md:-translate-y-1/2 f-bg p-6 md:p-8 shadow-2xl border border-[#F59E0B]/30 bg-[#FFFDF5] text-[#3B110B] max-h-[85vh] flex flex-col"
+            className="fixed inset-x-0 bottom-0 z-[70] mx-auto w-full max-w-lg rounded-t-[2.5rem] md:rounded-3xl md:bottom-auto md:top-86 md:-translate-y-1/2 f-bg p-6 md:p-8 shadow-2xl border border-[#F59E0B]/30 bg-[#FFFDF5] text-[#3B110B] max-h-[85vh] flex flex-col"
           >
-            {/* Header */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <ShoppingBag size={18} className="text-[#E11D48]" />
@@ -476,27 +474,26 @@ function CartDrawer({ open, onClose, items }) {
 
             <div className="rule-gold my-5" />
 
-            {/* Content Area */}
             <div className="flex-1 overflow-y-auto py-2">
               {items.length === 0 ? (
-                <div className="flex flex-col items-center justify-center text-center py-10 px-4 space-y-4">
+                <div className="flex flex-col items-center justify-center text-center px-4">
                   <div className="p-4 rounded-full bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] border border-[#F59E0B]/40 text-[#E11D48] shadow-md">
                     <Sparkles size={28} />
                   </div>
                   
                   <div className="space-y-1.5">
                     <span className="eyebrow uppercase tracking-[0.25em] text-[#D97706] text-[0.7rem] font-bold">
-                      Faroosh Skardu
+                      Faroosh Farms
                     </span>
                     <h3 className="f-display text-3xl md:text-4xl font-normal tracking-tight text-[#3B110B]">
                       Coming Soon
                     </h3>
                   </div>
 
-                  <p className="f-muted text-sm md:text-base font-jakarta font-bold max-w-[280px] mx-auto leading-relaxed text-[#5F2113]/80">
+                  <p className="f-muted text-sm md:text-base font-jakarta font-medium 2xl:font-bold max-w-[280px] mx-auto leading-relaxed text-[#5F2113]/80">
                     Our direct artisan checkout experience is launching shortly. Stay tuned for farm-fresh deliveries.
                   </p>
-                </div>
+                </div>             
               ) : (
                 <ul className="flex flex-col gap-4">
                   {items.map((item, i) => (
@@ -512,7 +509,6 @@ function CartDrawer({ open, onClose, items }) {
               )}
             </div>
 
-            {/* Footer Action */}
             <div className="pt-4 mt-auto">
               <button 
                 type="button" 
@@ -527,6 +523,7 @@ function CartDrawer({ open, onClose, items }) {
     </AnimatePresence>
   );
 }
+
 /* ------------------------------------------------------------------ */
 /* 5. HERO SECTION                                                    */
 /* ------------------------------------------------------------------ */
@@ -553,14 +550,14 @@ function Hero() {
 
   return (
     <section id="home" className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden pt-20">
-      <motion.img
-        src={heroFarms}
-        alt="Faroosh Farms"
+      <motion.div
         initial={{ scale: 1.15, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.4, ease: EASE }}
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+        className="absolute inset-0 h-full w-full"
+      >
+        <Image src={heroFarms} alt="Faroosh Farms" fill priority className="object-cover" />
+      </motion.div>
 
       <div
         className="absolute inset-0"
@@ -655,7 +652,7 @@ function FarmsStory() {
         variants={stagger}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: false, amount: 0.15 }}
+        viewport={{ once: true, amount: 0.02, margin: "0px 0px -50px 0px" }}
         className="mx-auto max-w-[1400px]"
       >
         <motion.div variants={rise} className="max-w-2xl">
@@ -671,15 +668,9 @@ function FarmsStory() {
 
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8">
           <motion.figure variants={rise} className="relative overflow-hidden md:col-span-7 md:row-span-2 rounded-xl">
-            <motion.img
-              style={{ y: y1, scale }}
-              src={heroFarms}
-              alt="Potohar Plateau Orchards"
-              loading="lazy"
-              width={1280}
-              height={1600}
-              className="h-[52vh] w-full object-cover md:h-[76vh]"
-            />
+            <motion.div style={{ y: y1, scale }} className="relative h-[52vh] w-full md:h-[76vh]">
+              <Image src={heroFarms} alt="Potohar Plateau Orchards" fill className="object-cover" />
+            </motion.div>
             <figcaption
               className="absolute bottom-0 left-0 right-0 p-8"
               style={{
@@ -694,15 +685,9 @@ function FarmsStory() {
           </motion.figure>
 
           <motion.figure variants={rise} className="overflow-hidden md:col-span-5 rounded-xl">
-            <motion.img
-              style={{ y: y2 }}
-              src={honeycomb}
-              alt="Raw Honeycomb"
-              loading="lazy"
-              width={1024}
-              height={1280}
-              className="h-[37vh] w-full object-cover"
-            />
+            <motion.div style={{ y: y2 }} className="relative h-[37vh] w-full">
+               <Image src={honeycomb} alt="Raw Honeycomb" fill className="object-cover" />
+            </motion.div>
           </motion.figure>
 
           <motion.blockquote
@@ -716,14 +701,9 @@ function FarmsStory() {
           </motion.blockquote>
 
           <motion.figure variants={rise} className="overflow-hidden md:col-span-5 rounded-xl">
-            <img
-              src={dryFruit}
-              alt="Sun-dried Organic Apricots"
-              loading="lazy"
-              width={1024}
-              height={768}
-              className="h-[32vh] w-full object-cover transition-transform duration-[1.2s] hover:scale-105"
-            />
+            <div className="relative h-[32vh] w-full">
+              <Image src={dryFruit} alt="Sun-dried Organic Apricots" fill className="object-cover transition-transform duration-[1.2s] hover:scale-105" />
+            </div>
           </motion.figure>
 
           <motion.div
@@ -815,11 +795,10 @@ function FarmStorytellingSection() {
   return (
     <section className="f-bg f-border border-b px-6 py-28 md:px-12 md:py-36">
       <div className="mx-auto max-w-[1400px]">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.02, margin: "0px 0px -50px 0px" }}
           transition={{ duration: 0.8, ease: EASE }}
           className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
         >
@@ -836,9 +815,7 @@ function FarmStorytellingSection() {
 
         <div className="rule-gold my-12" />
 
-        {/* Story Grid */}
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
-          {/* Left Navigation Tabs */}
           <div className="flex flex-col gap-4 lg:col-span-5">
             {STORIES.map((story, idx) => {
               const isActive = activeStory === idx;
@@ -874,7 +851,6 @@ function FarmStorytellingSection() {
             })}
           </div>
 
-          {/* Right Active Story Details */}
           <div className="lg:col-span-7">
             <AnimatePresence mode="wait">
               <motion.div
@@ -904,12 +880,12 @@ function FarmStorytellingSection() {
                   </div>
                 </div>
 
-                <div className="mt-8 flex items-center justify-between border-t border-stone-200 pt-6">
-                  <span className="eyebrow f-muted">Guaranteed Single-Origin</span>
-                  <a href="#products" className="eyebrow f-ink border-b border-black pb-0.5 font-bold transition-opacity hover:opacity-70">
-                    {STORIES[activeStory].linkText}
-                  </a>
-                </div>
+               <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between border-t border-stone-200 pt-6">
+  <span className="eyebrow f-muted">Guaranteed Single-Origin</span>
+  <a href="#products" className="eyebrow f-ink border-b border-black pb-0.5 font-bold transition-opacity hover:opacity-70">
+    {STORIES[activeStory].linkText}
+  </a>
+</div>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -926,7 +902,7 @@ const FILTERS = [
   { id: "all", label: "All Harvest" },
   { id: "honey", label: "Raw Honey" },
   { id: "nuts", label: "Nuts & Dried Fruits" },
-  { id: "seasonal", label: "Seasonal Fruits" }, // Naya filter add ho gaya
+  { id: "seasonal", label: "Seasonal Fruits" },
 ];
 
 function OfferingCard({ item }) {
@@ -965,8 +941,6 @@ function OfferingCard({ item }) {
   );
 }
 
-
-
 function FeatureGrid({ onAdd }) {
   const [filter, setFilter] = useState("all");
   const scrollContainerRef = useRef(null);
@@ -991,7 +965,6 @@ function FeatureGrid({ onAdd }) {
       `}</style>
 
       <div className="mx-auto max-w-[1400px]">
-        {/* ANIMATED TALK TO US BANNER */}
         <div className="relative overflow-hidden w-full mx-auto mb-12 rounded-3xl bg-gradient-to-r from-amber-50 via-yellow-100/60 to-orange-50 p-8 md:p-12 shadow-lg border border-amber-200/80">
           <div className="absolute top-0 right-0 -mt-12 -mr-12 h-64 w-64 rounded-full bg-gradient-to-br from-rose-500/20 to-orange-500/20 blur-[60px] animate-pulse" />
 
@@ -1021,7 +994,6 @@ function FeatureGrid({ onAdd }) {
           </div>
         </div>
 
-        {/* HEADER & FILTERS */}
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <span className="eyebrow f-accent">Curated Harvest</span>
@@ -1050,9 +1022,7 @@ function FeatureGrid({ onAdd }) {
 
         <div className="rule-gold my-12" />
 
-        {/* HORIZONTAL CAROUSEL WITH FIXED ORIGINAL CARD WIDTH */}
         <div className="relative group -mx-4 px-4 sm:mx-0 sm:px-0">
-          {/* Left Arrow Button */}
           <button 
             type="button"
             onClick={() => scroll("left")}
@@ -1064,7 +1034,6 @@ function FeatureGrid({ onAdd }) {
             </svg>
           </button>
 
-          {/* Right Arrow Button */}
           <button 
             type="button"
             onClick={() => scroll("right")}
@@ -1076,7 +1045,6 @@ function FeatureGrid({ onAdd }) {
             </svg>
           </button>
 
-          {/* Cards Container with original compact card sizes */}
           <motion.div 
             ref={scrollContainerRef}
             layout 
@@ -1141,25 +1109,25 @@ function Footer() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.02, margin: "0px 0px -50px 0px" }}
         transition={{ duration: 0.9, ease: EASE }}
         className="mx-auto grid max-w-[1400px] gap-14 md:grid-cols-3"
       >
         <div>
       <div>
-      {/* Medium Circle with both Image and Text Inside */}
       <div className="bg-[#FAE7AC] flex flex-col justify-center items-center rounded-full w-24 h-24">
-        <img 
+        <Image 
           src="/faroosh.png" 
           alt="Faroosh Logo" 
-          className="w-8 h-auto object-contain" 
+          width={32}
+          height={32}
+          className="object-contain" 
         />
         <span className="text-[#CAA387] font-bold text-[11px] mt-1 tracking-tight">
           Faroosh.pk
         </span>
       </div>
 
-      {/* Description Paragraph */}
       <p className="f-muted mt-6 max-w-xs text-sm font-normal leading-relaxed">
         Pure organic harvest from the Potohar plateau, Gilgit valleys, and Hunza terraces delivered straight to your home.
       </p>
@@ -1200,9 +1168,42 @@ function Footer() {
 /* ------------------------------------------------------------------ */
 /* 13. MAIN PAGE COMPONENT                                            */
 /* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* 13. MAIN PAGE COMPONENT                                            */
+/* ------------------------------------------------------------------ */
 export default function FarooshSinglePage() {
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
+
+  // ADVANCED SMOOTH SCROLLING ENGINE (With Fixed Header Offset)
+  useEffect(() => {
+    const handleSmoothScroll = (e) => {
+      // Sirf un links ko target karega jin me '#' hai (e.g., href="#products")
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      
+      const targetId = link.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        
+        // Header overlapping se bachne ke liye 85px ka margin offset
+        const headerOffset = 85; 
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+  
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    };
+
+    document.addEventListener('click', handleSmoothScroll, { passive: false });
+    return () => document.removeEventListener('click', handleSmoothScroll);
+  }, []);
 
   const addToCart = (title) => {
     setCart((prev) => [...prev, title]);
@@ -1212,7 +1213,7 @@ export default function FarooshSinglePage() {
   return (
     <MotionConfig reducedMotion="never">
       <Styles />
-      <main className="faroosh min-h-screen overflow-x-hidden">
+      <main className={`faroosh min-h-screen overflow-x-hidden ${cormorant.variable} ${jakarta.variable}`}>
         <Header cartCount={cart.length} onCartClick={() => setCartOpen(true)} />
         <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} items={cart} />
         <Hero />
@@ -1229,48 +1230,37 @@ export default function FarooshSinglePage() {
             <p className=" f-display mt-8 text-[clamp(1.8rem,3.4vw,2.9rem)] font-normal leading-[1.28]">
               Faroosh began with a single apricot orchard in the mountains. Today it stands as a bridge connecting Pakistan's richest organic harvest straight to your family home.
             </p>
-            {/* HIGH-IMPACT CLASSIC ANIMATED SEE MORE BUTTON */}
-    {/* MEDIUM CLASSIC ANIMATED SEE MORE BUTTON (Responsive) */}
-<div className="mt-6 flex w-full justify-center px-4 md:mt-8">
-  <Link
-    href="/story"
-    className="group relative inline-flex max-w-full items-center gap-3 overflow-hidden rounded-full border border-amber-500/40 bg-gradient-to-r from-[#FDF9F1] via-[#FFFDF8] to-[#FDF9F1] px-5 py-2 shadow-[0_4px_15px_rgba(217,119,6,0.08)] transition-all duration-500 hover:-translate-y-0.5 hover:border-amber-500 hover:shadow-[0_8px_20px_rgba(225,29,72,0.15)] md:px-6 md:py-2.5 touch-manipulation cursor-pointer"
-  >
-    {/* Ambient Hover Gradient Backdrop */}
-    <span className="absolute inset-0 bg-gradient-to-r from-rose-500/10 via-amber-500/15 to-orange-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-    {/* Light Sweep (Shine) Animation */}
-    <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/90 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full" />
-
-    {/* Live Pulsing Indicator Dot */}
-    <span className="relative flex h-1.5 w-1.5 shrink-0 md:h-2 md:w-2">
-      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-500 opacity-75" />
-      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-rose-600 md:h-2 md:w-2" />
-    </span>
-
-    {/* Typography */}
-    <span className="relative truncate text-[10px] font-bold uppercase tracking-[0.2em] text-stone-800 transition-colors duration-300 group-hover:text-amber-950 md:text-xs">
-      See More
-    </span>
-
-    {/* Animated Circle Icon with Gradient Fill on Hover */}
-    <div className="relative flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/15 text-amber-800 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-rose-600 group-hover:to-amber-500 group-hover:text-white group-hover:shadow-md md:h-6 md:w-6">
-      <svg
-        className="h-2.5 w-2.5 transition-transform duration-300 group-hover:translate-x-0.5 md:h-3 md:w-3"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2.5}
-          d="M17 8l4 4m0 0l-4 4m4-4H3"
-        />
-      </svg>
-    </div>
-  </Link>
-</div>
+            <div className="mt-6 flex w-full justify-center px-4 md:mt-8">
+              <Link
+                href="/story"
+                className="group relative inline-flex max-w-full items-center gap-3 overflow-hidden rounded-full border border-amber-500/40 bg-gradient-to-r from-[#FDF9F1] via-[#FFFDF8] to-[#FDF9F1] px-5 py-2 shadow-[0_4px_15px_rgba(217,119,6,0.08)] transition-all duration-500 hover:-translate-y-0.5 hover:border-amber-500 hover:shadow-[0_8px_20px_rgba(225,29,72,0.15)] md:px-6 md:py-2.5 touch-manipulation cursor-pointer"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-rose-500/10 via-amber-500/15 to-orange-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/90 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full" />
+                <span className="relative flex h-1.5 w-1.5 shrink-0 md:h-2 md:w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-500 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-rose-600 md:h-2 md:w-2" />
+                </span>
+                <span className="relative truncate text-[10px] font-bold uppercase tracking-[0.2em] text-stone-800 transition-colors duration-300 group-hover:text-amber-950 md:text-xs">
+                  See More
+                </span>
+                <div className="relative flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/15 text-amber-800 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-rose-600 group-hover:to-amber-500 group-hover:text-white group-hover:shadow-md md:h-6 md:w-6">
+                  <svg
+                    className="h-2.5 w-2.5 transition-transform duration-300 group-hover:translate-x-0.5 md:h-3 md:w-3"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2.5}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </div>
+              </Link>
+            </div>
           </div>
         </section>
 
