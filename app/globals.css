@@ -1,26 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+::-webkit-scrollbar {
+          width: 9px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #FFFDF5;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, #E11D48 0%, #EA580C 50%, #D97706 100%);
+          border-radius: 9999px;
+          border: 2px solid #FFFDF5;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg, #BE123C 0%, #C2410C 50%, #B45309 100%);
+        }
+
+        /* Firefox Support */
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: #EA580C #FFFDF5;
+        }
+
+.font-display {
+  font-family: 'Cormorant Garamond', ui-serif, Georgia, serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.font-sans-custom {
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Custom scrollbar chupane ke liye agar zaroorat pare */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+.story-text {
+  opacity: 0;
+  transform: scale(0.85); /* Koi translateY nahi, taake div ke bottom se na aaye */
+  transition: opacity 1.8s ease-out, transform 1.8s ease-out;
+  transition-delay: 2s; /* Exact 2 second ka wait */
+}
+
+.story-text.visible {
+  opacity: 1;
+  transform: scale(1);
 }
