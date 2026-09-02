@@ -31,7 +31,7 @@ const staggerContainer = {
 };
 
 export default function FarooshStoryPage() {
-  const whatsappUrl = "https://wa.me/923710506436";
+  const whatsappUrl = "https://api.whatsapp.com/send?phone=923710506436";
 
   return (
     <div className="faroosh relative min-h-screen bg-[#FFFDF5] text-[#3B110B] selection:bg-[#E11D48] selection:text-white font-jakarta overflow-x-hidden antialiased">
