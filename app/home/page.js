@@ -148,8 +148,8 @@ const honeyJar = "/prod-honey.jpg";
 /* ------------------------------------------------------------------ */
 const NAV_LINKS = [
   { label: "Story", href: "#story" },
-  { label: "Products", href: "#products" },
-  { label: "Contact", href: "#contact" },
+  { label: "Products", href: "/#products" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const TRUST_ITEMS = [
@@ -263,6 +263,7 @@ function Header({ cartCount, onCartClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [activeAnnounce, setActiveAnnounce] = useState(0);
 
   useEffect(() => {
@@ -284,15 +285,16 @@ function Header({ cartCount, onCartClick }) {
       initial={false}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.9, ease: EASE }}
-      className={`glass-nav fixed inset-x-0 top-0 z-[99999] isolate transition-all duration-500 ${scrolled ? "py-3" : "py-4"
-        }`}
+      className={`glass-nav fixed inset-x-0 top-0 z-[99999] isolate transition-all duration-500 ${
+        scrolled ? "py-3" : "py-4"
+      }`}
     >
       <div className="mx-auto grid w-full max-w-[1600px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 md:px-10">
-
+        
+        {/* LOGO */}
         <div className="flex items-center gap-4">
           <button
             type="button"
-            aria-label="Toggle menu"
             onClick={() => setMenuOpen((v) => !v)}
             className="p-1 lg:hidden cursor-pointer touch-manipulation"
           >
@@ -300,13 +302,14 @@ function Header({ cartCount, onCartClick }) {
           </button>
 
           <a href="/" className="text-left leading-none">
-            <div className="img flex flex-col h-full items-center text-center">
-              <Image width={30} height={30} src="/faroosh.png" alt="Faroosh Logo" />
-              <p className="text-[#CAA387]">Faroosh.pk</p>
+            <div className="img flex flex-col h-full items-center text-center group">
+              <Image width={30} height={30} src="/faroosh.png" alt="Faroosh Logo" className="transition-transform duration-[0.8s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:-translate-y-1" />
+              <p className="text-[#CAA387] font-sans text-sm mt-1 transition-colors duration-500 group-hover:text-[#D97706]">Faroosh</p>
             </div>
           </a>
         </div>
 
+        {/* TICKER */}
         <div className="hidden justify-center md:flex">
           <div className="f-sec f-border flex items-center gap-3 rounded-full border px-4 py-1.5 shadow-sm">
             <span className="relative flex h-2 w-2 flex-shrink-0">
@@ -321,10 +324,7 @@ function Header({ cartCount, onCartClick }) {
                   initial={{ x: 0, opacity: 0 }}
                   animate={{ x: -180, opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{
-                    x: { delay: 2, duration: 4.5, ease: "linear" },
-                    opacity: { duration: 0.5 }
-                  }}
+                  transition={{ x: { delay: 2, duration: 4.5, ease: "linear" }, opacity: { duration: 0.5 } }}
                   className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap"
                 >
                   <span className="eyebrow f-ink text-[0.68rem] font-semibold uppercase tracking-wider">
@@ -336,37 +336,90 @@ function Header({ cartCount, onCartClick }) {
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-5 md:gap-7">
-          <nav className="hidden items-center gap-7 lg:flex">
+        {/* RIGHT SIDE: PREMIUM ANIMATED LINKS & ICONS */}
+        <div className="flex items-center justify-end gap-5 md:gap-9">
+          
+         {/* NAVIGATION LINKS */}
+          <nav className="hidden items-center gap-8 lg:flex">
             {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="eyebrow f-muted cursor-pointer font-semibold transition-opacity duration-300 hover:opacity-100"
-              >
-                {link.label}
-              </a>
+              <div key={link.label} className="group relative">
+                <a
+                  href={link.href}
+                  onClick={(e) => {
+                    if (link.label === "Products") {
+                      // Sirf Products ke liye default behavior rokein aur dropdown kholain
+                      e.preventDefault();
+                      setIsProductsOpen(!isProductsOpen);
+                    } else {
+                      // Baqi links par click hone par dropdown band kar dein
+                      setIsProductsOpen(false);
+                      
+                      // Aapki purani original scroll logic
+                      const targetStr = link.href.replace('/', '');
+                      const el = document.querySelector(targetStr);
+                      if (el) {
+                        e.preventDefault();
+                        el.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }
+                  }}
+                  className="relative flex items-center gap-1.5 justify-center eyebrow cursor-pointer font-bold tracking-widest py-2 text-[var(--muted-fg)] transition-colors duration-[0.4s] group-hover:text-[#D97706]"
+                >
+                  <span>{link.label}</span>
+                  
+                  {/* Arrow icon (Products dropdown ke liye) */}
+                  {link.label === "Products" && (
+                    <svg 
+                      className={`w-3.5 h-3.5 transition-transform duration-300 ${isProductsOpen ? 'rotate-180' : 'rotate-0'}`} 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  )}
+
+                  {/* Golden Sweep Line (Hover par chalegi) */}
+                  <span className="absolute -bottom-0.5 left-0 w-full h-[2px] bg-gradient-to-r from-[#E11D48] via-[#EA580C] to-[#D97706] origin-right scale-x-0 transition-transform duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100" />
+                </a>
+
+                {/* Dropdown Menu (Click state par kaam karega) */}
+                {link.label === "Products" && (
+                  <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-300 z-50 ${isProductsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}>
+                    <div className="flex flex-col bg-white/95 backdrop-blur-md border border-[#FDE68A] shadow-[0_10px_30px_rgba(0,0,0,0.1)] rounded-xl py-2 w-48 overflow-hidden">
+                      <a href="#products" onClick={() => setIsProductsOpen(false)} className="eyebrow px-5 py-3 text-[10.5px] text-stone-600 transition-colors hover:text-[#D97706] hover:bg-amber-50/80">Dry Fruits</a>
+                      <a href="#products" onClick={() => setIsProductsOpen(false)} className="eyebrow px-5 py-3 text-[10.5px] text-stone-600 transition-colors hover:text-[#D97706] hover:bg-amber-50/80">Seasonal Fruits</a>
+                      <a href="#products" onClick={() => setIsProductsOpen(false)} className="eyebrow px-5 py-3 text-[10.5px] text-stone-600 transition-colors hover:text-[#D97706] hover:bg-amber-50/80">Raw Honey</a>
+                      <a href="#products" onClick={() => setIsProductsOpen(false)} className="eyebrow px-5 py-3 text-[10.5px] text-stone-600 transition-colors hover:text-[#D97706] hover:bg-amber-50/80">Potohar Peanuts</a>
+                    </div>
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
 
-          <div className="flex items-center gap-4">
+          {/* ICONS WITH PREMIUM HOVER DOTS */}
+          <div className="flex items-center gap-5">
             <button
               type="button"
-              aria-label="Search"
               onClick={() => setSearchOpen((v) => !v)}
-              className="transition-transform duration-300 hover:scale-110 cursor-pointer touch-manipulation"
+              className="group relative cursor-pointer touch-manipulation p-1"
             >
+              {/* <Search size={19} strokeWidth={1.5} className="text-[#3B110B] transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:text-[#D97706]" /> */}
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#D97706] opacity-0 scale-0 transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100" />
             </button>
-            <button type="button" aria-label="Account" className="hidden hover:scale-110 sm:block cursor-pointer touch-manipulation">
-              <User size={19} strokeWidth={1.5} />
+            
+            <button type="button" className="hidden sm:block group relative cursor-pointer touch-manipulation p-1">
+              <User size={19} strokeWidth={1.5} className="text-[#3B110B] transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:text-[#D97706]" />
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#D97706] opacity-0 scale-0 transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100" />
             </button>
+            
             <button
               type="button"
-              aria-label="Open cart"
               onClick={onCartClick}
-              className="relative cursor-pointer touch-manipulation transition-transform duration-300 hover:scale-110"
+              className="group relative cursor-pointer touch-manipulation p-1"
             >
-              <ShoppingBag size={19} strokeWidth={1.5} />
+              <ShoppingBag size={19} strokeWidth={1.5} className="text-[#3B110B] transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:text-[#D97706]" />
               <AnimatePresence>
                 {cartCount > 0 && (
                   <motion.span
@@ -375,17 +428,22 @@ function Header({ cartCount, onCartClick }) {
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                     style={{ background: "var(--gold)", color: "var(--earth-deep)" }}
-                    className="absolute -right-2 -top-2 grid h-4 min-w-4 place-items-center rounded-full px-1 text-[0.6rem] font-bold"
+                    className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full px-1 text-[0.6rem] font-bold shadow-sm"
                   >
                     {cartCount}
                   </motion.span>
                 )}
               </AnimatePresence>
+              {cartCount === 0 && (
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#D97706] opacity-0 scale-0 transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100" />
+              )}
             </button>
           </div>
+
         </div>
       </div>
 
+      {/* DROPDOWNS KEEP UNCHANGED */}
       <AnimatePresence>
         {searchOpen && (
           <motion.div
@@ -399,7 +457,7 @@ function Header({ cartCount, onCartClick }) {
               <input
                 autoFocus
                 placeholder="Search raw honey, dry fruits, Potohar peanuts…"
-                className="f-display f-border w-full border-b bg-transparent pb-3 text-2xl outline-none placeholder:text-stone-400"
+                className="f-display f-border w-full border-b bg-transparent pb-3 text-2xl outline-none placeholder:text-stone-400 text-[#3B110B]"
               />
             </div>
           </motion.div>

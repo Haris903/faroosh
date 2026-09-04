@@ -1,61 +1,451 @@
 'use client';
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin,
   Sparkles,
   ShieldCheck,
   PackageCheck,
   MessageCircle,
-  Clock
+  Clock,
+  Search,
+  User,
+  ShoppingBag,
+  Menu,
+  X
 } from "lucide-react";
 
+/* ------------------------------------------------------------------ */
+/* 0. NEXT.JS FONT OPTIMIZATION & BRAND STYLES                        */
+/* ------------------------------------------------------------------ */
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const CSS = `
+  html { scroll-behavior: smooth !important; }
+  .faroosh {
+    --ivory: oklch(0.985 0.005 85);
+    --ink: oklch(0.16 0.015 60);
+    --gold: oklch(0.72 0.14 75);
+    --earth: oklch(0.48 0.09 62);
+    --earth-deep: oklch(0.24 0.05 55);
+    --secondary: oklch(0.96 0.01 85);
+    --muted-fg: oklch(0.45 0.02 60);
+    --border: oklch(0.89 0.01 80);
+    font-family: var(--font-sans);
+  }
+  .f-display { font-family: var(--font-display); }
+  .f-bg { background: var(--ivory); }
+  .f-ink { color: var(--ink); }
+  .f-muted { color: var(--muted-fg); }
+  .f-accent { color: var(--gold); }
+  .f-sec { background: var(--secondary); }
+  .f-border { border-color: var(--border); }
+  .eyebrow {
+    font-family: var(--font-sans); 
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap;
+  }
+  .glass-nav {
+    background: color-mix(in oklab, var(--ivory) 85%, transparent);
+    backdrop-filter: blur(20px) saturate(160%);
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  }
+  .rule-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--gold) 90%, transparent), transparent);
+  }
+`;
+
+function Styles() {
+  return <style dangerouslySetInnerHTML={{ __html: CSS }} />;
+}
+
+/* ------------------------------------------------------------------ */
+/* 1. HEADER & CART COMPONENTS                                        */
+/* ------------------------------------------------------------------ */
 const EASE = [0.16, 1, 0.3, 1];
 
+const NAV_LINKS = [
+  { label: "Story", href: "/#story" },
+  { label: "Products", href: "/#products" },
+  { label: "Contact", href: "/contact" },
+];
+
+const ANNOUNCEMENTS = [
+  "100% Pure Wild Alpine Honey Harvested from Gilgit",
+  "Fresh Batch: Rain-Fed Potohar Peanuts In Stock",
+  "Sun-Cured Hunza Organic Dried Apricots Available",
+  "Free Shipping Across Pakistan on Orders Over 3,000 PKR",
+];
+
+function Header({ cartCount, onCartClick }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [activeAnnounce, setActiveAnnounce] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveAnnounce((prev) => (prev + 1) % ANNOUNCEMENTS.length);
+    }, 7000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <motion.header
+      initial={false}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.9, ease: EASE }}
+      className={`glass-nav fixed inset-x-0 top-0 z-[99999] isolate transition-all duration-500 ${
+        scrolled ? "py-3" : "py-4"
+      }`}
+    >
+      <div className="mx-auto grid w-full max-w-[1600px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 md:px-10">
+        
+        {/* LOGO */}
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            className="p-1 lg:hidden cursor-pointer touch-manipulation"
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+
+          <a href="/" className="text-left leading-none">
+            <div className="img flex flex-col h-full items-center text-center group">
+              <Image width={30} height={30} src="/faroosh.png" alt="Faroosh Logo" className="transition-transform duration-[0.8s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:-translate-y-1" />
+              <p className="text-[#CAA387] font-sans text-sm mt-1 transition-colors duration-500 group-hover:text-[#D97706]">Faroosh.pk</p>
+            </div>
+          </a>
+        </div>
+
+        {/* TICKER */}
+        <div className="hidden justify-center md:flex">
+          <div className="f-sec f-border flex items-center gap-3 rounded-full border px-4 py-1.5 shadow-sm">
+            <span className="relative flex h-2 w-2 flex-shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600"></span>
+            </span>
+
+            <div className="relative h-4 w-[260px] overflow-hidden lg:w-[340px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeAnnounce}
+                  initial={{ x: 0, opacity: 0 }}
+                  animate={{ x: -180, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ x: { delay: 2, duration: 4.5, ease: "linear" }, opacity: { duration: 0.5 } }}
+                  className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap"
+                >
+                  <span className="eyebrow f-ink text-[0.68rem] font-semibold uppercase tracking-wider">
+                    {ANNOUNCEMENTS[activeAnnounce]}
+                  </span>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE: PREMIUM ANIMATED LINKS & ICONS */}
+        <div className="flex items-center justify-end gap-5 md:gap-9">
+          
+        {/* NAVIGATION LINKS */}
+          <nav className="hidden items-center gap-8 lg:flex">
+            {NAV_LINKS.map((link) => (
+              <div key={link.label} className="group relative">
+                <a
+                  href={link.href}
+                  onClick={(e) => {
+                    if (link.label === "Products") {
+                      // Sirf Products ke liye default behavior rokein aur dropdown kholain
+                      e.preventDefault();
+                      setIsProductsOpen(!isProductsOpen);
+                    } else {
+                      // Baqi links par click hone par dropdown band kar dein
+                      setIsProductsOpen(false);
+                      
+                      // Aapki purani original scroll logic
+                      const targetStr = link.href.replace('/', '');
+                      const el = document.querySelector(targetStr);
+                      if (el) {
+                        e.preventDefault();
+                        el.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }
+                  }}
+                  className="relative flex items-center gap-1.5 justify-center eyebrow cursor-pointer font-bold tracking-widest py-2 text-[var(--muted-fg)] transition-colors duration-[0.4s] group-hover:text-[#D97706]"
+                >
+                  <span>{link.label}</span>
+                  
+                  {/* Arrow icon (Products dropdown ke liye) */}
+                  {link.label === "Products" && (
+                    <svg 
+                      className={`w-3.5 h-3.5 transition-transform duration-300 ${isProductsOpen ? 'rotate-180' : 'rotate-0'}`} 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  )}
+
+                  {/* Golden Sweep Line (Hover par chalegi) */}
+                  <span className="absolute -bottom-0.5 left-0 w-full h-[2px] bg-gradient-to-r from-[#E11D48] via-[#EA580C] to-[#D97706] origin-right scale-x-0 transition-transform duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100" />
+                </a>
+
+                {/* Dropdown Menu (Click state par kaam karega) */}
+                {link.label === "Products" && (
+                  <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-300 z-50 ${isProductsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}>
+                    <div className="flex flex-col bg-white/95 backdrop-blur-md border border-[#FDE68A] shadow-[0_10px_30px_rgba(0,0,0,0.1)] rounded-xl py-2 w-48 overflow-hidden">
+                      <a href="#products" onClick={() => setIsProductsOpen(false)} className="eyebrow px-5 py-3 text-[10.5px] text-stone-600 transition-colors hover:text-[#D97706] hover:bg-amber-50/80">Dry Fruits</a>
+                      <a href="#products" onClick={() => setIsProductsOpen(false)} className="eyebrow px-5 py-3 text-[10.5px] text-stone-600 transition-colors hover:text-[#D97706] hover:bg-amber-50/80">Seasonal Fruits</a>
+                      <a href="#products" onClick={() => setIsProductsOpen(false)} className="eyebrow px-5 py-3 text-[10.5px] text-stone-600 transition-colors hover:text-[#D97706] hover:bg-amber-50/80">Raw Honey</a>
+                      <a href="#products" onClick={() => setIsProductsOpen(false)} className="eyebrow px-5 py-3 text-[10.5px] text-stone-600 transition-colors hover:text-[#D97706] hover:bg-amber-50/80">Potohar Peanuts</a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+
+          {/* ICONS WITH PREMIUM HOVER DOTS */}
+          <div className="flex items-center gap-5">
+            <button
+              type="button"
+              onClick={() => setSearchOpen((v) => !v)}
+              className="group relative cursor-pointer touch-manipulation p-1"
+            >
+              {/* <Search size={19} strokeWidth={1.5} className="text-[#3B110B] transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:text-[#D97706]" /> */}
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#D97706] opacity-0 scale-0 transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100" />
+            </button>
+            
+            <button type="button" className="hidden sm:block group relative cursor-pointer touch-manipulation p-1">
+              <User size={19} strokeWidth={1.5} className="text-[#3B110B] transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:text-[#D97706]" />
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#D97706] opacity-0 scale-0 transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100" />
+            </button>
+            
+            <button
+              type="button"
+              onClick={onCartClick}
+              className="group relative cursor-pointer touch-manipulation p-1"
+            >
+              <ShoppingBag size={19} strokeWidth={1.5} className="text-[#3B110B] transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:text-[#D97706]" />
+              <AnimatePresence>
+                {cartCount > 0 && (
+                  <motion.span
+                    key={cartCount}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    style={{ background: "var(--gold)", color: "var(--earth-deep)" }}
+                    className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full px-1 text-[0.6rem] font-bold shadow-sm"
+                  >
+                    {cartCount}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+              {cartCount === 0 && (
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#D97706] opacity-0 scale-0 transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100" />
+              )}
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      {/* DROPDOWNS KEEP UNCHANGED */}
+      <AnimatePresence>
+        {searchOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.45, ease: EASE }}
+            className="overflow-hidden bg-white/95"
+          >
+            <div className="mx-auto max-w-[1600px] px-5 pb-4 pt-5 md:px-10">
+              <input
+                autoFocus
+                placeholder="Search raw honey, dry fruits, Potohar peanuts…"
+                className="f-display f-border w-full border-b bg-transparent pb-3 text-2xl outline-none placeholder:text-stone-400 text-[#3B110B]"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden bg-white/95 lg:hidden mt-2"
+          >
+            <div className="flex flex-col gap-5 px-6 pb-8 pt-6">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="eyebrow f-ink text-sm font-semibold cursor-pointer touch-manipulation"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+}
+
+function CartDrawer({ open, onClose, items }) {
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={onClose}
+            className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm"
+            style={{ willChange: "opacity" }}
+          />
+
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "130%" }}
+            transition={{ type: "spring", stiffness: 350, damping: 35, mass: 0.8 }}
+            style={{ willChange: "transform" }}
+            className="fixed inset-x-0 bottom-0 z-[70] mx-auto w-full max-w-lg rounded-t-[2.5rem] md:rounded-3xl md:bottom-auto md:top-86 md:-translate-y-1/2 f-bg p-6 md:p-8 shadow-2xl border border-[#F59E0B]/30 bg-[#FFFDF5] text-[#3B110B] max-h-[85vh] flex flex-col"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <ShoppingBag size={18} className="text-[#E11D48]" />
+                <span className="eyebrow f-muted text-xs font-bold tracking-[0.2em] uppercase">Your Basket Selection</span>
+              </div>
+              <button 
+                type="button" 
+                onClick={onClose} 
+                className="p-2 cursor-pointer rounded-full hover:bg-[#FDE68A]/30 transition-colors text-[#3B110B]"
+              >
+                <X size={20} strokeWidth={1.5} />
+              </button>
+            </div>
+
+            <div className="rule-gold my-5" />
+
+            <div className="flex-1 overflow-y-auto py-2">
+              {items.length === 0 ? (
+                <div className="flex flex-col items-center justify-center text-center px-4">
+                  <div className="p-4 rounded-full bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] border border-[#F59E0B]/40 text-[#E11D48] shadow-md">
+                    <Sparkles size={28} />
+                  </div>
+                  <div className="space-y-1.5 mt-4">
+                    <span className="eyebrow uppercase tracking-[0.25em] text-[#D97706] text-[0.7rem] font-bold">
+                      Faroosh Farms
+                    </span>
+                    <h3 className="f-display text-3xl md:text-4xl font-normal tracking-tight text-[#3B110B]">
+                      Coming Soon
+                    </h3>
+                  </div>
+                  <p className="f-muted text-sm md:text-base font-jakarta font-medium max-w-[280px] mx-auto leading-relaxed text-[#5F2113]/80 mt-2">
+                    Our direct artisan checkout experience is launching shortly. Stay tuned for farm-fresh deliveries.
+                  </p>
+                </div>             
+              ) : (
+                <ul className="flex flex-col gap-4">
+                  {items.map((item, i) => (
+                    <li key={i} className="f-border flex items-baseline justify-between gap-4 border-b border-[#FDE68A] pb-4">
+                      <span className="f-display text-xl md:text-2xl font-medium text-[#3B110B]">{item}</span>
+                      <span className="eyebrow f-muted text-xs">Qty: 01</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div className="pt-4 mt-auto">
+              <button type="button" className="w-full py-4 rounded-full bg-gradient-to-r from-[#E11D48] via-[#EA580C] to-[#D97706] text-white font-medium text-sm tracking-wider uppercase shadow-lg shadow-[#E11D48]/20 hover:opacity-95 transition-all flex items-center justify-center gap-2">
+                Proceed to Checkout
+              </button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* 2. MAIN STORY PAGE CONTENT                                         */
+/* ------------------------------------------------------------------ */
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
   visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: EASE }
+    opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE }
   }
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.18, delayChildren: 0.1 }
+    opacity: 1, transition: { staggerChildren: 0.18, delayChildren: 0.1 }
   }
 };
 
 export default function FarooshStoryPage() {
+  const [cart, setCart] = useState([]);
+  const [cartOpen, setCartOpen] = useState(false);
   const whatsappUrl = "https://api.whatsapp.com/send?phone=923710506436";
 
   return (
-    <div className="faroosh relative min-h-screen bg-[#FFFDF5] text-[#3B110B] selection:bg-[#E11D48] selection:text-white font-jakarta overflow-x-hidden antialiased">
+    <div className={`faroosh relative min-h-screen bg-[#FFFDF5] text-[#3B110B] selection:bg-[#E11D48] selection:text-white font-jakarta overflow-x-hidden antialiased ${cormorant.variable} ${jakarta.variable}`}>
+      <Styles />
       
+      {/* 🟢 HEADER INJECTED HERE */}
+      <Header cartCount={cart.length} onCartClick={() => setCartOpen(true)} />
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} items={cart} />
+
       {/* CUSTOM THEME SCROLLBAR STYLES */}
       <style>{`
-        ::-webkit-scrollbar {
-          width: 9px;
-        }
-        ::-webkit-scrollbar-track {
-          background: #FFFDF5;
-        }
+        ::-webkit-scrollbar { width: 9px; }
+        ::-webkit-scrollbar-track { background: #FFFDF5; }
         ::-webkit-scrollbar-thumb {
           background: linear-gradient(180deg, #E11D48 0%, #EA580C 50%, #D97706 100%);
-          border-radius: 9999px;
-          border: 2px solid #FFFDF5;
+          border-radius: 9999px; border: 2px solid #FFFDF5;
         }
-        ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(180deg, #BE123C 0%, #C2410C 50%, #B45309 100%);
-        }
-        * {
-          scrollbar-width: thin;
-          scrollbar-color: #EA580C #FFFDF5;
-        }
+        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #BE123C 0%, #C2410C 50%, #B45309 100%); }
+        * { scrollbar-width: thin; scrollbar-color: #EA580C #FFFDF5; }
       `}</style>
 
       {/* GEOMETRIC GOLDEN BACKGROUND PATTERN */}
@@ -307,7 +697,6 @@ export default function FarooshStoryPage() {
           </div>
         </motion.div>
       </section>
-
     </div>
   );
 }
