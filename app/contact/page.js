@@ -616,16 +616,16 @@ export default function FarooshContactPage() {
       </main>
 
       {/* MINIMAL LUXURY FOOTER */}
-      <footer className="relative z-10 border-t border-[#D97706]/20 mt-10">
-        <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-          <p className="eyebrow text-[0.65rem] text-[#5F2113]/70 font-semibold tracking-widest">
-            Faroosh · Grown with care in the Pothohar Region
-          </p>
-          <p className="eyebrow text-[0.65rem] text-[#5F2113]/70 font-semibold tracking-widest">
-            Native produce. Honest relationships.
-          </p>
-        </div>
-      </footer>
+      <footer className="relative z-10 border-t border-[#D97706]/20 mt-12 bg-white/40 backdrop-blur-sm">
+  <div className="mx-auto max-w-[1400px] px-6 sm:px-8 lg:px-12 py-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+    <p className="font-serif text-xs md:text-sm text-[#5F2113] font-medium tracking-wider leading-relaxed">
+      Faroosh <span className="inline-block mx-1.5 opacity-50">·</span> Grown with care in the Pothohar Region
+    </p>
+    <p className="font-serif text-xs md:text-sm text-[#5F2113]/80 font-normal tracking-wide italic">
+      Native produce. Honest relationships.
+    </p>
+  </div>
+</footer>
     </div>
   );
 }
