@@ -773,19 +773,18 @@ export default function FarooshContactPage() {
         <div className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#E11D48]/5 blur-[130px]" />
       </div>
 
+   {/* ========================================================= */}
+      {/* 3. MAIN CONTACT HERO & INQUIRY FORM                       */}
+      {/* ========================================================= */}
       <main className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-24 px-5 md:px-10 max-w-[1400px] mx-auto min-h-[90vh] flex flex-col justify-center">
-        
         <motion.div 
           variants={staggerContainer}
           initial="hidden"
           animate="show"
           className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start"
         >
-          
           {/* LEFT COLUMN: BRAND STORY & DIRECT CONTACT INFO */}
           <div className="lg:col-span-6 space-y-12">
-            
-            {/* Intro Text */}
             <div className="space-y-6">
               <motion.div variants={fadeUp} className="flex items-center gap-4">
                 <span className="w-8 h-[1px] bg-[#E11D48]" />
@@ -832,26 +831,24 @@ export default function FarooshContactPage() {
             <motion.div variants={fadeUp} className="space-y-5 pt-4">
               <span className="eyebrow text-[#5F2113]/60 tracking-widest block mb-2">Talk to us directly</span>
               
-              {/* WhatsApp Premium Button */}
-             <a 
-  href="https://api.whatsapp.com/send?phone=923710506436" 
-  target="_blank" 
-  rel="noreferrer"
-  className="group flex items-center justify-between w-full max-w-md p-4 rounded-2xl border border-[#D97706]/30 bg-white/60 hover:bg-white shadow-sm hover:shadow-md transition-all duration-300"
->
-  <div className="flex items-center gap-4">
-    <div className="w-12 h-12 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg shadow-[#E11D48]/30 group-hover:scale-105 transition-transform">
-      <MessageCircle size={22} fill="currentColor" />
-    </div>
-    <div>
-      <p className="text-xs font-bold text-[#5F2113]/70 uppercase tracking-widest mb-0.5">WhatsApp</p>
-      <p className="text-lg font-jakarta tracking-wide font-bold text-[#3B110B]">Chat Instantly</p>
-    </div>
-  </div>
-  <ArrowUpRight size={20} className="text-[#D97706] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-</a>
+              <a 
+                href="https://api.whatsapp.com/send?phone=923710506436" 
+                target="_blank" 
+                rel="noreferrer"
+                className="group flex items-center justify-between w-full max-w-md p-4 rounded-2xl border border-[#D97706]/30 bg-white/60 hover:bg-white shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg shadow-[#E11D48]/30 group-hover:scale-105 transition-transform">
+                    <MessageCircle size={22} fill="currentColor" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-[#5F2113]/70 uppercase tracking-widest mb-0.5">WhatsApp</p>
+                    <p className="text-lg font-jakarta tracking-wide font-bold text-[#3B110B]">Chat Instantly</p>
+                  </div>
+                </div>
+                <ArrowUpRight size={20} className="text-[#D97706] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </a>
 
-              {/* Email & Location */}
               <div className="flex flex-col gap-4 pl-2 mt-6">
                 <a href="mailto:hello@faroosh.pk" className="flex items-center gap-4 text-[#5F2113] font-medium hover:text-[#D97706] transition-colors w-fit">
                   <Mail size={18} className="text-[#E11D48]" />
@@ -863,27 +860,26 @@ export default function FarooshContactPage() {
                 </div>
               </div>
             </motion.div>
-
           </div>
 
           {/* RIGHT COLUMN: THE INQUIRY FORM */}
-          <motion.div variants={fadeUp} className="lg:col-span-6 w-full max-w-xl mx-auto lg:ml-auto lg:mr-0 mt-8 lg:mt-0">
+          <motion.div 
+            id="inquiry-form"
+            variants={fadeUp} 
+            className="lg:col-span-6 w-full max-w-xl mx-auto lg:ml-auto lg:mr-0 mt-8 lg:mt-0 scroll-mt-28"
+          >
             <InquiryForm />
           </motion.div>
-
         </motion.div>
       </main>
 
-      {/* MINIMAL LUXURY FOOTER */}
-   {/* ========================================================= */}
+      {/* ========================================================= */}
       {/* 9. CUSTOMER REVIEWS SECTION (page2.js Tailored Edition)   */}
       {/* ========================================================= */}
       <section className="relative overflow-hidden border-b border-t border-[#D97706]/20 bg-[#FFFDF5]/70 px-3.5 sm:px-6 md:px-12 py-12 md:py-20 font-jakarta selection:bg-amber-500 selection:text-white z-10">
-        {/* Subtle Ambient Glow Behind Wall */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="mx-auto max-w-[1500px] relative z-10">
-          {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 px-2">
             <span className="eyebrow text-[#D97706] text-[0.7rem] sm:text-xs font-bold tracking-[0.25em] uppercase">
               Real Experiences
@@ -896,7 +892,7 @@ export default function FarooshContactPage() {
             </p>
           </div>
 
-          {/* Staggered Dual-Column Mobile & 4-Column Desktop Glass Wall */}
+          {/* 2-Column Mobile & 4-Column Desktop Glass Wall */}
           <div className="columns-2 lg:columns-4 gap-2.5 sm:gap-4 space-y-2.5 sm:space-y-4">
             {[
               {
@@ -978,15 +974,12 @@ export default function FarooshContactPage() {
                 }}
                 className="relative overflow-hidden break-inside-avoid transform-gpu rounded-xl sm:rounded-[1.4rem] bg-white/60 hover:bg-white/85 backdrop-blur-2xl saturate-[180%] p-3 sm:p-4 md:p-5 border border-white/85 hover:border-amber-400/50 shadow-[0_4px_20px_rgba(0,0,0,0.03),inset_0_1.5px_1px_rgba(255,255,255,0.9)] hover:shadow-[-8px_14px_30px_-6px_rgba(225,29,72,0.15),8px_14px_30px_-6px_rgba(217,119,6,0.18)] transition-all duration-200 flex flex-col justify-between group cursor-default"
               >
-                {/* iPhone Specular Glass Glare */}
                 <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-transparent pointer-events-none rounded-xl sm:rounded-[1.4rem]" />
 
-                {/* Review Text */}
                 <p className="relative z-10 text-[11px] sm:text-[12.5px] md:text-[13px] leading-snug sm:leading-relaxed text-[#2A160F] font-normal tracking-normal select-none">
                   {rev.quote}
                 </p>
 
-                {/* Author Line (Warm Divider - No Black Color) */}
                 <div className="relative z-10 mt-2.5 pt-2 sm:mt-3.5 sm:pt-2.5 border-t border-amber-900/10 flex flex-col xs:flex-row xs:items-center justify-between gap-0.5">
                   <span className="text-[10px] sm:text-xs font-bold text-[#E11D48] tracking-tight sm:tracking-wide group-hover:text-[#B91C1C] transition-colors truncate">
                     {rev.author}
@@ -999,26 +992,52 @@ export default function FarooshContactPage() {
             ))}
           </div>
 
-          {/* Bottom Action Button */}
+          {/* Smooth Scroll Button */}
           <div className="mt-8 sm:mt-12 flex justify-center">
-            <motion.a
-              href="/contact"
+            <motion.button
+              type="button"
+              onClick={() => {
+                const formEl = document.getElementById("inquiry-form");
+                if (formEl) {
+                  const headerOffset = 110;
+                  const elementPosition = formEl.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                  });
+
+                  setTimeout(() => {
+                    const firstInput = formEl.querySelector("input");
+                    if (firstInput) firstInput.focus();
+                  }, 650);
+                }
+              }}
               whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
-              className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/90 px-6 sm:px-8 py-3 sm:py-3.5 text-[10.5px] sm:text-xs font-bold tracking-[0.2em] uppercase text-[#3B110B] shadow-sm hover:border-[#D97706] hover:text-[#D97706] hover:shadow-md transition-colors touch-manipulation cursor-pointer font-jakarta"
+              whileTap={{ scale: 0.98 }}
+              className="group inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/95 px-7 sm:px-8 py-3.5 text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-[#3B110B] shadow-sm hover:border-[#D97706] hover:text-[#D97706] hover:shadow-md transition-all duration-200 touch-manipulation cursor-pointer font-jakarta"
             >
               <span>Write Your Own Review</span>
-            </motion.a>
+              <svg 
+                className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 text-[#D97706]" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor" 
+                strokeWidth={2.5}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+              </svg>
+            </motion.button>
           </div>
         </div>
       </section>
 
       {/* ========================================================= */}
-      {/* 10. PURPOSE & HERITAGE SANCTUARY (Jakarta Modern Glass)   */}
+      {/* 10. PURPOSE & HERITAGE SANCTUARY                          */}
       {/* ========================================================= */}
       <section id="story" className="relative overflow-hidden px-5 py-16 md:px-12 md:py-24 font-jakarta z-10">
         <div className="mx-auto max-w-[1400px]">
-          {/* Cinematic Transparent Glass Card */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1026,7 +1045,6 @@ export default function FarooshContactPage() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="relative overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem] bg-black/45 backdrop-blur-3xl border border-white/20 shadow-[0_30px_90px_-20px_rgba(0,0,0,0.6)]"
           >
-            {/* Clean 4K Video Canvas */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
               <video
                 autoPlay
@@ -1038,16 +1056,11 @@ export default function FarooshContactPage() {
               >
                 <source src="/dryfruits.mp4" type="video/mp4" />
               </video>
-
-              {/* Crystal Clear Dark Glass Gradients */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/75" />
               <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[750px] h-[400px] bg-amber-500/15 rounded-full blur-[140px]" />
             </div>
 
-            {/* Main Content Area */}
             <div className="relative z-10 px-6 py-16 sm:px-12 md:px-20 md:py-24 flex flex-col items-center text-center font-jakarta">
-              
-              {/* Top Heritage Badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -1064,7 +1077,6 @@ export default function FarooshContactPage() {
                 </span>
               </motion.div>
 
-              {/* Modern Branded Headline */}
               <motion.h2
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1079,7 +1091,6 @@ export default function FarooshContactPage() {
                 connecting Pakistan’s richest, unadulterated terroir straight to your family table.
               </motion.h2>
 
-              {/* Subtitle Description */}
               <motion.p
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1090,7 +1101,6 @@ export default function FarooshContactPage() {
                 No commercial blends, zero artificial post-processing. Every jar of raw mountain nectar and single-harvest peanut is gathered at peak physiological ripeness and packed directly at the source.
               </motion.p>
 
-              {/* 4-Pillar Frosted Metric Cards */}
               <div className="mt-14 grid w-full max-w-4xl grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/15">
                 {[
                   { target: 3200, suffix: "m", label: "Origin Altitude", sub: "Glacial meltwater purity" },
@@ -1107,11 +1117,9 @@ export default function FarooshContactPage() {
                     whileHover={{ y: -6, scale: 1.02 }}
                     className="group relative rounded-2xl bg-white/[0.08] hover:bg-white/[0.14] border border-white/20 hover:border-amber-400/60 p-5 transition-all duration-400 backdrop-blur-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.25)] flex flex-col justify-between"
                   >
-                    {/* Box Glare Hover Highlight */}
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
                     <div className="relative z-10">
-                      {/* Rolling Bold Jakarta Number */}
                       <div className="text-2xl sm:text-3xl font-jakarta font-extrabold text-[#FDE68A] group-hover:text-amber-300 tracking-tight [font-variant-numeric:tabular-nums] select-none transition-colors">
                         {stat.prefix ? (
                           <span>{stat.prefix}</span>
@@ -1120,13 +1128,11 @@ export default function FarooshContactPage() {
                         )}
                       </div>
 
-                      {/* Metric Label */}
                       <p className="mt-2 text-[0.7rem] text-stone-200 font-bold uppercase tracking-[0.16em] group-hover:text-white transition-colors">
                         {stat.label}
                       </p>
                     </div>
 
-                    {/* Sub-text */}
                     <p className="relative z-10 mt-2 text-[11px] text-stone-300/80 font-normal leading-tight">
                       {stat.sub}
                     </p>
@@ -1134,7 +1140,6 @@ export default function FarooshContactPage() {
                 ))}
               </div>
 
-              {/* "See More" Button */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1162,7 +1167,6 @@ export default function FarooshContactPage() {
                   </div>
                 </Link>
               </motion.div>
-
             </div>
           </motion.div>
         </div>
@@ -1172,14 +1176,13 @@ export default function FarooshContactPage() {
       {/* 11. FOOTER SECTION                                        */}
       {/* ========================================================= */}
       <footer id="contact" className="relative overflow-hidden border-t border-[#D97706]/20 bg-white/50 px-6 py-14 md:px-12 md:py-20 font-jakarta selection:bg-amber-500 selection:text-white z-10">
-        {/* Ambient Atmospheric Aura */}
         <div className="absolute -top-32 right-1/4 h-[350px] w-[500px] rounded-full bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-transparent blur-[140px] pointer-events-none" />
         <div className="absolute -bottom-24 left-10 h-[280px] w-[350px] rounded-full bg-[#E11D48]/5 blur-[120px] pointer-events-none" />
 
         <div className="mx-auto max-w-[1400px] relative z-10">
           <div className="grid gap-12 lg:grid-cols-12 md:gap-14">
             
-            {/* Brand Column (Original Logo 100% Preserved) */}
+            {/* Brand Column */}
             <div className="lg:col-span-5 space-y-6">
               <div className="group w-fit cursor-default">
                 <div className="bg-[#FAE7AC] flex flex-col justify-center items-center rounded-full w-24 h-24 shadow-[0_6px_25px_rgba(217,119,6,0.18)] border border-amber-200/60 transition-all duration-200 ease-out group-hover:scale-[1.03] group-hover:shadow-[0_10px_28px_rgba(225,29,72,0.2)] transform-gpu">
@@ -1308,6 +1311,5 @@ export default function FarooshContactPage() {
         </div>
       </footer>
     </div>
-  
   );
 }
