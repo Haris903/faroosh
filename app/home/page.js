@@ -1371,7 +1371,7 @@ export default function FarooshSinglePage() {
           </div>
         </section>
 
-{/* ========================================================= */}
+       {/* ========================================================= */}
         {/* 9. CUSTOMER REVIEWS SECTION (Mobile 2-Column Glass Wall)  */}
         {/* ========================================================= */}
         <section className="f-sec f-border relative overflow-hidden border-b border-t px-3.5 sm:px-6 md:px-12 py-12 md:py-20 font-jakarta selection:bg-amber-500 selection:text-white">
@@ -1508,7 +1508,6 @@ export default function FarooshSinglePage() {
             </div>
           </div>
         </section>
-
 
          {/* ========================================================= */}
         {/* 10. PURPOSE & HERITAGE SANCTUARY (Jakarta Modern Glass)   */}
