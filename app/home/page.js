@@ -1371,135 +1371,137 @@ export default function FarooshSinglePage() {
           </div>
         </section>
 
+{/* ========================================================= */}
+        {/* 9. CUSTOMER REVIEWS SECTION (Mobile 2-Column Glass Wall)  */}
         {/* ========================================================= */}
-        {/* 9. CUSTOMER REVIEWS SECTION                               */}
-        {/* ========================================================= */}
-     <section className="f-sec f-border relative overflow-hidden border-b border-t px-5 py-14 md:px-12 md:py-20">
+        <section className="f-sec f-border relative overflow-hidden border-b border-t px-3.5 sm:px-6 md:px-12 py-12 md:py-20 font-jakarta selection:bg-amber-500 selection:text-white">
           {/* Subtle Ambient Glow Behind Wall */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
 
           <div className="mx-auto max-w-[1500px] relative z-10">
             {/* Section Header */}
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <span className="eyebrow f-accent">Real Experiences</span>
-              <h2 className="f-display mt-3 text-4xl font-normal md:text-5xl text-[#3B110B]">
+            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 px-2">
+              <span className="eyebrow text-[#D97706] text-[0.7rem] sm:text-xs font-bold tracking-[0.25em] uppercase">
+                Real Experiences
+              </span>
+              <h2 className="f-display mt-2.5 sm:mt-3 text-3xl sm:text-4xl md:text-5xl font-normal text-[#3B110B] leading-tight">
                 Trusted Across Homes
               </h2>
-              <p className="f-muted mt-3 text-sm md:text-base font-normal">
+              <p className="f-muted mt-2 sm:mt-3 text-xs sm:text-sm md:text-base font-normal">
                 Authentic words from families savoring pure harvest across Pakistan.
               </p>
             </div>
 
-            {/* Dynamic Masonry Columns Wall (iPhone Glass Message Boxes) */}
-            <div className="columns-1 sm:columns-2 lg:columns-4 gap-4 space-y-4">
+            {/* Staggered Dual-Column Mobile & 4-Column Desktop Glass Wall */}
+            <div className="columns-2 lg:columns-4 gap-2.5 sm:gap-4 space-y-2.5 sm:space-y-4">
               {[
                 {
                   quote: "Can honestly say Faroosh offers unmatched quality. They answered all my questions before I decided to order. The honeycomb and Chakwal peanuts came well packaged and very quickly. Going to place another order soon.",
                   author: "Gareth Malik",
-                  time: "1 day ago",
+                  time: "1d ago",
                 },
                 {
-                  quote: "Couldn't be happier with this harvest. I kept their site bookmarked till I needed authentic raw honey, and everything has been 100% pure. Delivery was prompt and glass jars are packed with utmost care. Will be my place of choice for all organic produce.",
+                  quote: "Couldn't be happier with this harvest. Kept their site bookmarked till I needed authentic raw honey, and everything has been 100% pure. Delivery was prompt and glass jars are packed with utmost care.",
                   author: "Irene Tariq",
-                  time: "2 days ago",
+                  time: "2d ago",
                 },
                 {
-                  quote: "I've found a real difference within 2 weeks of substituting regular sugar with their raw wild mountain honey. Natural enzymes feel authentic and morning energy levels are noticeably better. Absolutely pure.",
+                  quote: "Real difference within 2 weeks of substituting sugar with their wild mountain honey. Natural enzymes feel authentic and morning energy levels are noticeably better. Absolutely pure.",
                   author: "Lorna Shah",
-                  time: "3 days ago",
+                  time: "3d ago",
                 },
                 {
                   quote: "Easy to order, quick nationwide delivery. All items came in pristine condition. Real mountain produce at very reasonable rates.",
                   author: "Tessa A.",
-                  time: "4 days ago",
+                  time: "4d ago",
                 },
                 {
-                  quote: "Wanted to try authentic rain-fed peanuts from Chakwal and Gilgit walnuts. The crunch is distinctly richer than supermarket stock, with no chemical aftertaste. Truly impressed by the generational craft.",
+                  quote: "Wanted to try authentic rain-fed peanuts from Chakwal and Gilgit walnuts. The crunch is distinctly richer than supermarket stock, with no chemical aftertaste.",
                   author: "Claire R.",
-                  time: "5 days ago",
+                  time: "5d ago",
                 },
                 {
-                  quote: "Great purchase, simple checkout process. Discreet and eco-friendly glass packaging. Freshness intact upon opening. Definitely ordering the apricots next.",
+                  quote: "Great purchase, simple checkout process. Discreet and eco-friendly glass packaging. Freshness intact upon opening. Definitely ordering apricots next.",
                   author: "Trevor S.",
-                  time: "6 days ago",
+                  time: "6d ago",
                 },
                 {
                   quote: "This is now my 2nd purchase from Faroosh. Super fast delivery to Lahore and product quality is really 100% natural. Thank you team!",
                   author: "Gaynor J.",
-                  time: "7 days ago",
+                  time: "7d ago",
                 },
                 {
                   quote: "Nice and easy to order, responsive support team, and fresh batch aroma as soon as the parcel opened.",
                   author: "Andrew Williams",
-                  time: "1 week ago",
+                  time: "1w ago",
                 },
                 {
                   quote: "Fair direct farm prices and quick dispatch. Rare to find unheated raw honey with zero crystal additives in Pakistan.",
                   author: "Andrew W.",
-                  time: "1 week ago",
+                  time: "1w ago",
                 },
                 {
                   quote: "Great service once again. Reliable growers who actually stand behind their single-origin promise. Highly recommended to everyone.",
                   author: "Irene Tonge",
-                  time: "1 week ago",
+                  time: "1w ago",
                 },
                 {
                   quote: "Fast delivery, great product taste, genuine Potohar soil flavor in every single peanut batch.",
                   author: "Chris Martin",
-                  time: "1 week ago",
+                  time: "1w ago",
                 },
                 {
                   quote: "Brilliant products, reasonable farm prices, quick dispatch and very detailed harvest origin details on every pack.",
                   author: "Rich Wilson",
-                  time: "1 week ago",
+                  time: "1w ago",
                 },
               ].map((rev, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
+                  viewport={{ once: true, amount: 0.08 }}
                   transition={{
-                    duration: 0.35,
-                    delay: (idx % 4) * 0.04,
+                    duration: 0.3,
+                    delay: (idx % 4) * 0.03,
                     ease: "easeOut",
                   }}
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -4 }}
                   style={{
-                    willChange: "transform, opacity, box-shadow",
+                    willChange: "transform, opacity",
                     backfaceVisibility: "hidden",
                     WebkitFontSmoothing: "subpixel-antialiased",
                   }}
-                  className="relative overflow-hidden break-inside-avoid transform-gpu rounded-[1.4rem] bg-white/40 hover:bg-white/65 backdrop-blur-2xl saturate-[180%] p-5 border border-white/70 hover:border-amber-400/40 shadow-[0_8px_30px_rgba(0,0,0,0.03),inset_0_1.5px_1px_rgba(255,255,255,0.85)] hover:shadow-[-12px_18px_35px_-6px_rgba(225,29,72,0.18),12px_18px_35px_-6px_rgba(217,119,6,0.2)] transition-all duration-300 flex flex-col justify-between group cursor-default"
+                  className="relative overflow-hidden break-inside-avoid transform-gpu rounded-xl sm:rounded-[1.4rem] bg-white/55 hover:bg-white/80 backdrop-blur-2xl saturate-[180%] p-3 sm:p-4 md:p-5 border border-white/80 hover:border-amber-400/50 shadow-[0_4px_20px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,0.9)] hover:shadow-[-8px_14px_30px_-6px_rgba(225,29,72,0.15),8px_14px_30px_-6px_rgba(217,119,6,0.18)] transition-all duration-200 flex flex-col justify-between group cursor-default"
                 >
                   {/* iPhone Specular Glass Glare */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-transparent pointer-events-none rounded-[1.4rem]" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-transparent pointer-events-none rounded-xl sm:rounded-[1.4rem]" />
 
                   {/* Review Text */}
-                  <p className="relative z-10 text-[13px] leading-relaxed text-[#2A160F] font-normal tracking-normal select-none">
+                  <p className="relative z-10 text-[11px] sm:text-[12.5px] md:text-[13px] leading-snug sm:leading-relaxed text-[#2A160F] font-normal tracking-normal select-none">
                     {rev.quote}
                   </p>
 
                   {/* Author Line */}
-                  <div className="relative z-10 mt-4 pt-3 border-t border-black/[0.06] flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#E11D48] tracking-wide group-hover:text-[#B91C1C] transition-colors">
+                  <div className="relative z-10 mt-2.5 pt-2 sm:mt-3.5 sm:pt-2.5 border-t border-black/[0.06] flex flex-col xs:flex-row xs:items-center justify-between gap-0.5">
+                    <span className="text-[10px] sm:text-xs font-bold text-[#E11D48] tracking-tight sm:tracking-wide group-hover:text-[#B91C1C] transition-colors truncate">
                       {rev.author}
                     </span>
-                    <span className="text-[11px] font-medium text-stone-500">
-                      — {rev.time}
+                    <span className="text-[9px] sm:text-[11px] font-medium text-stone-500 whitespace-nowrap">
+                      {rev.time}
                     </span>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Bottom Button */}
-            <div className="mt-12 flex justify-center">
+            {/* Bottom Action Button */}
+            <div className="mt-8 sm:mt-12 flex justify-center">
               <motion.a
                 href="#contact"
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
-                className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/90 px-8 py-3.5 text-xs font-bold tracking-[0.2em] uppercase text-[#3B110B] shadow-sm hover:border-[#D97706] hover:text-[#D97706] hover:shadow-md transition-colors touch-manipulation cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/90 px-6 sm:px-8 py-3 sm:py-3.5 text-[10.5px] sm:text-xs font-bold tracking-[0.2em] uppercase text-[#3B110B] shadow-sm hover:border-[#D97706] hover:text-[#D97706] hover:shadow-md transition-colors touch-manipulation cursor-pointer font-jakarta"
               >
                 <span>Write Your Own Review</span>
               </motion.a>
