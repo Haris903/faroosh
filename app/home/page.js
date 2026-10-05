@@ -850,19 +850,19 @@ export default function FarooshSinglePage() {
         </section>
 
 
-      {/* ========================================================= */}
-        {/* 6. SOURCING PROCESS FLOW SECTION (Kinetic Provenance Deck)*/}
-        {/* ========================================================= */}
-       {/* ========================================================= */}
+      
         {/* 6. SOURCING PROCESS FLOW SECTION (Fast & Solid Jakarta UI)*/}
         {/* ========================================================= */}
+        {/* ========================================================= */}
+        {/* 6. SOURCING PROCESS FLOW SECTION (Sequential Kinetic Deck)*/}
+        {/* ========================================================= */}
         <section className="f-sec f-border relative overflow-hidden border-b border-t px-5 py-12 sm:py-16 md:px-12 md:py-20 font-jakarta selection:bg-amber-500 selection:text-white">
-          {/* Subtle Ambient Light Reflections */}
+          {/* Ambient Subtle Warmth */}
           <div className="absolute top-1/2 left-1/4 -translate-y-1/2 h-[380px] w-[450px] rounded-full bg-amber-500/5 blur-[150px] pointer-events-none" />
           <div className="absolute bottom-6 right-8 h-[300px] w-[350px] rounded-full bg-orange-500/5 blur-[130px] pointer-events-none" />
 
           <div className="mx-auto max-w-[1400px] relative z-10">
-            {/* Section Header (Responsive & Zero Text-Wrap Jitter) */}
+            {/* Section Header */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -892,9 +892,10 @@ export default function FarooshSinglePage() {
               </p>
             </motion.div>
 
-            {/* Kinetic Fast Connecting Pipeline (Desktop Only) */}
+            {/* Kinetic Pipeline Container */}
             <div className="relative">
-              <div className="absolute top-[4.2rem] left-[5%] right-[5%] hidden lg:block h-[1.5px] z-0 pointer-events-none">
+              {/* Desktop Horizontal Connecting Beam (Cards Ke Peeche) */}
+              <div className="absolute top-[3.75rem] left-[6%] right-[6%] hidden lg:block h-[1.5px] z-0 pointer-events-none">
                 <div className="w-full h-full bg-amber-200/50" />
                 <motion.div
                   className="absolute top-0 bottom-0 w-24 bg-gradient-to-r from-transparent via-[#E11D48] to-transparent"
@@ -903,8 +904,8 @@ export default function FarooshSinglePage() {
                 />
               </div>
 
-              {/* 4 Cards Grid (Responsive + Branded Medium Jakarta Typography) */}
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 relative z-10">
+              {/* 4 Cards Grid */}
+              <div className="grid grid-cols-1 gap-7 sm:gap-6 lg:grid-cols-4 relative z-10">
                 {[
                   {
                     num: "01",
@@ -952,17 +953,17 @@ export default function FarooshSinglePage() {
                         ease: "easeOut",
                       }}
                       whileHover={{ y: -5 }}
-                      className="group relative flex flex-col justify-between rounded-2xl bg-white/75 hover:bg-white border border-stone-200/80 hover:border-amber-400/60 p-5 sm:p-6 backdrop-blur-xl shadow-[0_6px_25px_-10px_rgba(36,18,12,0.04)] hover:shadow-[0_16px_35px_-8px_rgba(217,119,6,0.14)] transition-all duration-150 ease-out overflow-hidden transform-gpu [backface-visibility:hidden]"
+                      className="group relative flex flex-col justify-between rounded-2xl bg-white border border-stone-200/80 hover:border-amber-400/60 p-5 sm:p-6 shadow-[0_6px_25px_-10px_rgba(36,18,12,0.04)] hover:shadow-[0_16px_35px_-8px_rgba(217,119,6,0.14)] transition-all duration-150 ease-out transform-gpu [backface-visibility:hidden] z-10"
                     >
-                      {/* Top Specular Shine */}
-                      <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90" />
+                      {/* Inner Safe Overflow Container (Watermark & Top Shine) */}
+                      <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+                        <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90" />
+                        <span className="absolute -right-2 -bottom-4 text-6xl sm:text-7xl font-extrabold text-stone-900/[0.03] group-hover:text-amber-500/[0.07] transition-colors duration-150 select-none font-jakarta">
+                          {step.num}
+                        </span>
+                      </div>
 
-                      {/* Giant Subtle Background Watermark */}
-                      <span className="absolute -right-2 -bottom-4 text-6xl sm:text-7xl font-extrabold text-stone-900/[0.03] group-hover:text-amber-500/[0.07] transition-colors duration-150 select-none pointer-events-none font-jakarta">
-                        {step.num}
-                      </span>
-
-                      <div>
+                      <div className="relative z-10">
                         {/* Top Indicator Row */}
                         <div className="flex items-center justify-between gap-2">
                           <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#24120C] text-[#FDE68A] text-xs font-extrabold font-jakarta tracking-tight shadow-xs shrink-0">
@@ -974,26 +975,26 @@ export default function FarooshSinglePage() {
                           </div>
                         </div>
 
-                        {/* Screenshot-Style Tag: Medium, Clean & Solid Tracked Font */}
+                        {/* Tag */}
                         <div className="mt-4">
                           <p className="text-[11px] sm:text-[11.5px] font-bold uppercase tracking-[0.16em] text-[#B45309] font-jakarta whitespace-nowrap overflow-hidden text-ellipsis">
                             {step.tag}
                           </p>
                         </div>
 
-                        {/* Title: Medium Branded Font */}
+                        {/* Title */}
                         <h3 className="text-xl sm:text-2xl font-bold text-[#24120C] tracking-tight group-hover:text-[#D97706] transition-colors duration-150 font-jakarta mt-1.5 whitespace-nowrap">
                           {step.title}
                         </h3>
 
-                        {/* Description: High Readability Jakarta Body */}
+                        {/* Description */}
                         <p className="mt-2.5 text-xs sm:text-[13px] text-stone-600 font-normal leading-relaxed font-jakarta">
                           {step.desc}
                         </p>
                       </div>
 
                       {/* Bottom Metric Pill */}
-                      <div className="mt-5 pt-3.5 border-t border-stone-100 flex items-center justify-between">
+                      <div className="relative z-10 mt-5 pt-3.5 border-t border-stone-100 flex items-center justify-between">
                         <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[10.5px] font-bold uppercase tracking-wider text-amber-900/90 bg-amber-50/80 px-2.5 py-1 rounded-md border border-amber-200/60 font-jakarta whitespace-nowrap">
                           <Sparkles size={11} className="text-[#D97706]" />
                           {step.badge}
@@ -1001,6 +1002,22 @@ export default function FarooshSinglePage() {
 
                         <span className="h-1.5 w-1.5 rounded-full bg-stone-300 group-hover:bg-emerald-500 transition-colors duration-150" />
                       </div>
+
+                      {/* MOBILE VERTICAL BEAM: Strictly side ke 01, 02, 03 ke niche aligned (left-[34px]) aur sequential timing */}
+                      {idx < 3 && (
+                        <div className="lg:hidden absolute -bottom-7 left-[34px] -translate-x-1/2 w-[1.5px] h-7 bg-amber-200/60 z-0 overflow-hidden pointer-events-none">
+                          <motion.div
+                            className="absolute inset-x-0 w-full h-3.5 bg-gradient-to-b from-transparent via-[#E11D48] to-transparent"
+                            animate={{ top: ["-100%", "200%"] }}
+                            transition={{
+                              repeat: Infinity,
+                              duration: 3.3, // Total cycle
+                              delay: idx * 1.1, // Ik sath nahi chalenge, step-by-step
+                              ease: "easeInOut",
+                            }}
+                          />
+                        </div>
+                      )}
                     </motion.div>
                   );
                 })}
@@ -1031,11 +1048,10 @@ export default function FarooshSinglePage() {
 
           </div>
         </section>
-        
+       {/* ========================================================= */}
+        {/* 7. FARM STORYTELLING SECTION (Mobile Layout Fixed)        */}
         {/* ========================================================= */}
-        {/* 7. FARM STORYTELLING SECTION (Interactive Stories)        */}
-        {/* ========================================================= */}
-         <section className="f-bg relative overflow-hidden border-b border-stone-200/80 px-6 py-12 md:px-12 md:py-18">
+        <section className="f-bg relative overflow-hidden border-b border-stone-200/80 px-4 sm:px-6 py-12 md:px-12 md:py-18">
           <div className="mx-auto max-w-[1400px]">
             {/* Section Header */}
             <motion.div
@@ -1047,7 +1063,7 @@ export default function FarooshSinglePage() {
             >
               <div className="max-w-2xl">
                 <span className="eyebrow f-accent text-xs">The Roots of Faroosh</span>
-                <h2 className="f-display mt-3 text-[clamp(2.4rem,4.5vw,4.2rem)] font-normal leading-[1.08] text-[#24120C]">
+                <h2 className="f-display mt-3 text-[clamp(2.2rem,4.5vw,4.2rem)] font-normal leading-[1.08] text-[#24120C]">
                   Stories shaped by <span className="f-earth italic">sun, soil, and hands.</span>
                 </h2>
               </div>
@@ -1059,10 +1075,10 @@ export default function FarooshSinglePage() {
             <div className="rule-gold my-8" />
 
             {/* Main Interactive Showcase Grid */}
-            <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-12 lg:gap-10">
               
-              {/* Left Column: Authentic Tabs (1st Image Style with Enhanced Feedback) */}
-              <div className="flex flex-col gap-3.5 lg:col-span-4 justify-between">
+              {/* Left Column: Authentic Tabs */}
+              <div className="flex flex-col gap-3 lg:col-span-4 justify-between">
                 {STORIES.map((story, idx) => {
                   const isActive = activeStory === idx;
                   return (
@@ -1073,13 +1089,12 @@ export default function FarooshSinglePage() {
                       whileHover={{ x: isActive ? 0 : 3 }}
                       whileTap={{ scale: 0.99 }}
                       transition={{ duration: 0.15 }}
-                      className={`group relative flex flex-col justify-between rounded-xl border p-5 sm:p-6 text-left transition-all duration-300 cursor-pointer overflow-hidden ${
+                      className={`group relative flex flex-col justify-between rounded-xl border p-4 sm:p-6 text-left transition-all duration-300 cursor-pointer overflow-hidden ${
                         isActive
                           ? "bg-gradient-to-r from-amber-50/90 via-[#FFFDF8] to-orange-50/50 border-amber-300/80 shadow-[0_10px_30px_-10px_rgba(217,119,6,0.15)]"
                           : "bg-white/40 hover:bg-white/80 border-stone-200/70 opacity-75 hover:opacity-100"
                       }`}
                     >
-                      {/* 1st Image Iconic Gold Left Border Bar */}
                       {isActive && (
                         <motion.div
                           layoutId="heritageTabBorder"
@@ -1089,7 +1104,7 @@ export default function FarooshSinglePage() {
                       )}
 
                       <div className="flex items-center justify-between gap-2">
-                        <span className={`eyebrow text-[0.7rem] font-bold tracking-widest transition-colors ${
+                        <span className={`text-[10px] sm:text-[11px] font-bold uppercase tracking-wider font-jakarta transition-colors ${
                           isActive ? "text-[#D97706]" : "text-stone-500"
                         }`}>
                           {story.tag}
@@ -1099,20 +1114,19 @@ export default function FarooshSinglePage() {
                         </span>
                       </div>
 
-                      <div className="mt-2.5">
-                        <h3 className={`f-display text-2xl font-medium tracking-tight transition-colors ${
+                      <div className="mt-2">
+                        <h3 className={`f-display text-xl sm:text-2xl font-medium tracking-tight transition-colors ${
                           isActive ? "text-[#24120C]" : "text-stone-800"
                         }`}>
                           {story.title}
                         </h3>
-                        <p className="eyebrow f-muted text-[10.5px] mt-1 tracking-wider uppercase">
+                        <p className="text-[10.5px] text-stone-500 mt-1 uppercase tracking-wider font-jakarta font-semibold">
                           {story.subtitle}
                         </p>
                       </div>
 
-                      {/* Subtle Active Indicator */}
                       <div className="mt-3 pt-2.5 border-t border-stone-200/50 flex items-center justify-between">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center gap-1.5">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center gap-1.5 font-jakarta">
                           <span className={`h-1.5 w-1.5 rounded-full ${isActive ? "bg-amber-500 animate-pulse" : "bg-transparent"}`} />
                           {isActive ? "Currently Viewing" : "Explore Origin"}
                         </span>
@@ -1123,7 +1137,7 @@ export default function FarooshSinglePage() {
                 })}
               </div>
 
-              {/* Right Column: 1st Image Structured Card with 2nd Image Integrated UI */}
+              {/* Right Column: Detail Card (With Safe Responsive Header) */}
               <div className="lg:col-span-8">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -1132,47 +1146,50 @@ export default function FarooshSinglePage() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -15 }}
                     transition={{ duration: 0.35, ease: EASE }}
-                    className="f-sec f-border relative flex flex-col justify-between h-full rounded-2xl border border-stone-200/90 bg-[#FFFDF9] p-6 sm:p-8 md:p-10 shadow-[0_12px_40px_-15px_rgba(0,0,0,0.05)]"
+                    className="f-sec f-border relative flex flex-col justify-between h-full rounded-2xl border border-stone-200/90 bg-[#FFFDF9] p-4 sm:p-7 md:p-10 shadow-[0_12px_40px_-15px_rgba(0,0,0,0.05)] overflow-hidden"
                   >
-                    {/* Card Top Provenance Bar */}
-                    <div className="flex items-center justify-between border-b border-stone-200/70 pb-4">
-                      <span className="eyebrow f-earth text-xs font-bold tracking-widest">
+                    {/* Fixed Card Top Provenance Bar (No More Overflow on Mobile) */}
+                    <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-stone-200/70 pb-3 sm:pb-4">
+                      <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest text-[#5F2113]/90 font-jakarta">
                         {STORIES[activeStory].tag}
                       </span>
-                      <span className="eyebrow text-[10px] text-emerald-800 font-bold bg-emerald-50 border border-emerald-200/70 px-3 py-1 rounded-full uppercase tracking-widest">
+                      
+                      {/* Responsive Green Terroir Badge */}
+                      <span className="inline-flex items-center gap-1.5 text-[9.5px] sm:text-[10.5px] text-emerald-800 font-bold bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded-full uppercase tracking-wider font-jakarta shrink-0">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                         Single-Origin Terroir
                       </span>
                     </div>
 
-                    {/* Middle: Integrated Story Copy + Terroir Media Capsule */}
-                    <div className="my-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    {/* Middle: Integrated Story Copy + Terroir Media */}
+                    <div className="my-5 sm:my-6 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-center">
                       
-                      {/* Left Side: Story Text & Heritage Attributes */}
-                      <div className="md:col-span-7 space-y-4">
-                        <h3 className="f-display text-3xl sm:text-4xl font-normal text-[#24120C] leading-snug">
+                      {/* Left Side: Story Copy */}
+                      <div className="md:col-span-7 space-y-3.5">
+                        <h3 className="f-display text-2xl sm:text-3xl md:text-4xl font-normal text-[#24120C] leading-snug">
                           {STORIES[activeStory].title}
                         </h3>
 
-                        <p className="f-muted text-sm sm:text-base font-normal leading-relaxed">
+                        <p className="f-muted text-xs sm:text-sm md:text-base font-normal leading-relaxed">
                           {STORIES[activeStory].body}
                         </p>
 
-                        {/* 2nd Image Purity Capsules */}
-                        <div className="flex flex-wrap gap-2 pt-2">
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-[11px] font-bold text-amber-900 font-jakarta">
+                        {/* Purity Capsules */}
+                        <div className="flex flex-wrap gap-2 pt-1.5">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-[10.5px] font-bold text-amber-900 font-jakarta">
                             <Leaf size={12} className="text-amber-600" />
                             {activeStory === 0 ? "Rain-Fed Clay Soil" : activeStory === 1 ? "Wild Mountain Flora" : "Sun-Cured River Stones"}
                           </span>
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-100 border border-stone-200 text-[11px] font-semibold text-stone-700 font-jakarta">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-100 border border-stone-200 text-[10.5px] font-semibold text-stone-700 font-jakarta">
                             <ShieldCheck size={12} className="text-emerald-600" />
                             Zero Additives
                           </span>
                         </div>
                       </div>
 
-                      {/* Right Side: Terroir Image with 1st Image Inspired Stat Card */}
+                      {/* Right Side: Terroir Image with Stat Overlay */}
                       <div className="md:col-span-5 relative">
-                        <div className="relative aspect-[4/4] sm:aspect-[4/3] md:aspect-[4/4] w-full overflow-hidden rounded-xl border border-stone-200 shadow-md group">
+                        <div className="relative aspect-[4/3] sm:aspect-square md:aspect-[4/4] w-full overflow-hidden rounded-xl border border-stone-200 shadow-md group">
                           <Image
                             src={
                               activeStory === 0 
@@ -1187,12 +1204,12 @@ export default function FarooshSinglePage() {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
 
-                          {/* Floating Stat Overlay (1st Image Typography in 2nd Image Capsule) */}
-                          <div className="absolute bottom-3 inset-x-3 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 p-3 text-center text-white shadow-lg">
+                          {/* Floating Stat Overlay */}
+                          <div className="absolute bottom-2.5 inset-x-2.5 sm:bottom-3 sm:inset-x-3 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 p-2.5 sm:p-3 text-center text-white shadow-lg">
                             <p className="f-display text-2xl sm:text-3xl font-light text-[#F3C06B] tracking-tight">
                               {STORIES[activeStory].stat}
                             </p>
-                            <p className="eyebrow text-[9.5px] font-bold text-stone-200 mt-0.5 tracking-wider uppercase">
+                            <p className="text-[9px] sm:text-[9.5px] font-bold text-stone-200 mt-0.5 tracking-wider uppercase font-jakarta">
                               {STORIES[activeStory].statLabel}
                             </p>
                           </div>
@@ -1200,15 +1217,15 @@ export default function FarooshSinglePage() {
                       </div>
                     </div>
 
-                    {/* Bottom Action Footer (Matches 1st Image Clean Structure) */}
-                    <div className="pt-4 border-t border-stone-200/70 flex flex-col sm:flex-row items-center justify-between gap-4">
-                      <span className="eyebrow f-muted text-xs font-semibold">
+                    {/* Bottom Action Footer */}
+                    <div className="pt-3.5 border-t border-stone-200/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+                      <span className="text-[11px] font-semibold text-stone-500 font-jakarta">
                         Guaranteed Single-Origin
                       </span>
 
                       <a
                         href="#products"
-                        className="group inline-flex items-center gap-1.5 eyebrow text-xs f-ink font-bold tracking-widest border-b border-[#24120C] pb-0.5 transition-colors hover:text-[#D97706] hover:border-[#D97706]"
+                        className="group inline-flex items-center gap-1.5 text-xs f-ink font-bold tracking-wider font-jakarta border-b border-[#24120C] pb-0.5 transition-colors hover:text-[#D97706] hover:border-[#D97706]"
                       >
                         <span>{STORIES[activeStory].linkText}</span>
                         <ArrowUpRight size={13} className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-[#D97706]" />
