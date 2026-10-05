@@ -1496,16 +1496,18 @@ export default function FarooshSinglePage() {
             </div>
 
             {/* Bottom Action Button */}
+            {/* <Link></Link> */}
             <div className="mt-8 sm:mt-12 flex justify-center">
-              <motion.a
-                href="#contact"
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0 }}
-                className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/90 px-6 sm:px-8 py-3 sm:py-3.5 text-[10.5px] sm:text-xs font-bold tracking-[0.2em] uppercase text-[#3B110B] shadow-sm hover:border-[#D97706] hover:text-[#D97706] hover:shadow-md transition-colors touch-manipulation cursor-pointer font-jakarta"
-              >
-                <span>Write Your Own Review</span>
-              </motion.a>
-            </div>
+  <Link href="/contact">
+    <motion.div
+      whileHover={{ y: -2 }}
+      whileTap={{ y: 0 }}
+      className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/90 px-6 sm:px-8 py-3 sm:py-3.5 text-[10.5px] sm:text-xs font-bold tracking-[0.2em] uppercase text-[#3B110B] shadow-sm hover:border-[#D97706] hover:text-[#D97706] hover:shadow-md transition-colors touch-manipulation cursor-pointer font-jakarta"
+    >
+      <span>Write Your Own Review</span>
+    </motion.div>
+  </Link>
+</div>
           </div>
         </section>
 
