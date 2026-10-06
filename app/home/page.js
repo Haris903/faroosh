@@ -388,7 +388,7 @@ export default function FarooshSinglePage() {
           transition={{ duration: 0.8, ease: EASE }}
           className={`fixed inset-x-0 top-0 z-[99999] isolate transition-all duration-500 font-jakarta ${
             scrolled
-              ? "py-2 sm:py-2.5 px-3 sm:px-6 md:px-10"
+              ? "py-2 sm:py-2.5 px-3 sm:px-6 md:px-5"
               : "py-3 sm:py-4 px-4 sm:px-8 md:px-12"
           }`}
         >
