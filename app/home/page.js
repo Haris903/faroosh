@@ -462,6 +462,7 @@ export default function FarooshSinglePage() {
               </div>
 
               {/* CENTER: Desktop Live Ticker Bulletin */}
+            {/* CENTER: Desktop Live Ticker Bulletin */}
               <div className="hidden lg:flex justify-center">
                 <div className="flex items-center gap-3 rounded-full border border-stone-200/80 bg-white/70 px-4 py-1.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] backdrop-blur-md">
                   <span className="relative flex h-2 w-2 shrink-0">
@@ -473,13 +474,16 @@ export default function FarooshSinglePage() {
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={activeAnnounce}
-                        initial={{ y: 12, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -12, opacity: 0 }}
-                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap"
+                        initial={{ x: 10, opacity: 0 }}
+                        animate={{ x: -240, opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                          x: { delay: 1.6, duration: 4.8, ease: "linear" },
+                          opacity: { duration: 0.35 },
+                        }}
+                        className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap will-change-transform"
                       >
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#3B110B] font-jakarta select-none">
+                        <span className="eyebrow text-[#24120C] text-[0.68rem] font-bold uppercase tracking-[0.22em] select-none">
                           {ANNOUNCEMENTS[activeAnnounce]}
                         </span>
                       </motion.div>
@@ -585,28 +589,32 @@ export default function FarooshSinglePage() {
             </div>
 
             {/* MOBILE ONLY: Live Kinetic Terroir Ribbon (Khali Pan Khatam Karne Ke Liye) */}
-            <div className="mt-2 pt-2 border-t border-stone-200/60 lg:hidden flex items-center justify-between gap-2 overflow-hidden">
+           {/* MOBILE ONLY: Live Kinetic Terroir Ribbon */}
+            <div className="mt-2 pt-2 border-t border-stone-200/60 lg:hidden flex items-center gap-2 overflow-hidden">
               <div className="flex items-center gap-1.5 shrink-0">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#D97706]" />
                 </span>
                 <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#B45309]">
-                  Live Harvest:
+                  Live:
                 </span>
               </div>
 
-              <div className="relative h-3.5 w-full overflow-hidden text-right">
+              <div className="relative h-4 w-full overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeAnnounce}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.35 }}
-                    className="absolute inset-y-0 right-0 flex items-center"
+                    initial={{ x: 10, opacity: 0 }}
+                    animate={{ x: -260, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      x: { delay: 1.5, duration: 5.2, ease: "linear" },
+                      opacity: { duration: 0.35 },
+                    }}
+                    className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap will-change-transform"
                   >
-                    <span className="text-[9.5px] font-bold uppercase tracking-wider text-stone-700 truncate">
+                    <span className="eyebrow text-[#24120C] text-[0.65rem] font-bold uppercase tracking-wider select-none">
                       {ANNOUNCEMENTS[activeAnnounce]}
                     </span>
                   </motion.div>

@@ -97,7 +97,7 @@ const EASE = [0.16, 1, 0.3, 1];
 
 const NAV_LINKS = [
   { label: "Story", href: "/#story" },
-  { label: "Products", href: "/#products" },
+  { label: "Products", href: "/home/#products" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -219,46 +219,65 @@ function Header({ cartCount = 0, onCartClick }) {
 
               {/* CENTER: Desktop Live Ticker Bulletin */}
               <div className="hidden lg:flex justify-center">
-                <div className="flex items-center gap-3 rounded-full border border-stone-200/80 bg-white/70 px-4 py-1.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] backdrop-blur-md">
-                  <span className="relative flex h-2 w-2 shrink-0">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" />
-                  </span>
-
-                  <div className="relative h-4 w-[280px] xl:w-[340px] overflow-hidden">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={activeAnnounce}
-                        initial={{ y: 12, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -12, opacity: 0 }}
-                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap"
-                      >
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#3B110B] font-jakarta select-none">
-                          {ANNOUNCEMENTS[activeAnnounce]}
-                        </span>
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </div>
+                              <div className="flex items-center gap-3 rounded-full border border-stone-200/80 bg-white/70 px-4 py-1.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] backdrop-blur-md">
+                                <span className="relative flex h-2 w-2 shrink-0">
+                                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" />
+                                </span>
+              
+                                <div className="relative h-4 w-[280px] xl:w-[340px] overflow-hidden">
+                                  <AnimatePresence mode="wait">
+                                    <motion.div
+                                      key={activeAnnounce}
+                                      initial={{ x: 10, opacity: 0 }}
+                                      animate={{ x: -240, opacity: 1 }}
+                                      exit={{ opacity: 0 }}
+                                      transition={{
+                                        x: { delay: 1.6, duration: 4.8, ease: "linear" },
+                                        opacity: { duration: 0.35 },
+                                      }}
+                                      className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap will-change-transform"
+                                    >
+                                      <span className="eyebrow text-[#24120C] text-[0.68rem] font-bold uppercase tracking-[0.22em] select-none">
+                                        {ANNOUNCEMENTS[activeAnnounce]}
+                                      </span>
+                                    </motion.div>
+                                  </AnimatePresence>
+                                </div>
+                              </div>
+                            </div>
+              
 
               {/* RIGHT: Desktop Nav & Action Suite */}
               <div className="flex items-center justify-end gap-3 sm:gap-6">
                 
                 {/* Desktop Editorial Navigation Links */}
+                {/* Desktop Editorial Navigation Links */}
                 <nav className="hidden lg:flex items-center gap-7">
                   {NAV_LINKS.map((link) => (
                     <div key={link.label} className="group relative">
-                      <a
+                      <Link
                         href={link.href}
                         onClick={(e) => {
-                          const targetStr = link.href.replace("/", "");
-                          const el = document.querySelector(targetStr);
-                          if (el) {
-                            e.preventDefault();
-                            el.scrollIntoView({ behavior: "smooth" });
+                          if (link.href.includes("#")) {
+                            const hash = "#" + link.href.split("#")[1];
+                            const isHome =
+                              window.location.pathname === "/home" ||
+                              window.location.pathname === "/";
+
+                            // Agar user pehle se home page par ho toh smooth scroll karega
+                            if (isHome) {
+                              e.preventDefault();
+                              const el = document.querySelector(hash);
+                              if (el) {
+                                const headerOffset = 90;
+                                const elementPosition = el.getBoundingClientRect().top;
+                                const offsetPosition =
+                                  elementPosition + window.scrollY - headerOffset;
+                                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                              }
+                            }
+                            // Agar contact page par hai toh Next.js naturally /home/#story ya /home/#products par redirect karega
                           }
                         }}
                         className="relative flex items-center gap-1.5 py-1 text-xs font-bold tracking-[0.2em] uppercase text-stone-700 transition-colors duration-200 hover:text-[#D97706] cursor-pointer"
@@ -279,20 +298,36 @@ function Header({ cartCount = 0, onCartClick }) {
 
                         {/* Gold Underline Sweep */}
                         <span className="absolute -bottom-0.5 left-0 w-full h-[1.5px] bg-[#D97706] origin-right scale-x-0 transition-transform duration-300 ease-out group-hover:origin-left group-hover:scale-x-100" />
-                      </a>
+                      </Link>
 
                       {/* Dropdown Menu */}
                       {link.label === "Products" && (
                         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 z-50 opacity-0 invisible translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto">
                           <div className="flex flex-col bg-white/95 backdrop-blur-2xl border border-amber-200/80 shadow-[0_14px_35px_-5px_rgba(0,0,0,0.12)] rounded-2xl py-2 w-52 overflow-hidden">
                             {["Dry Fruits", "Seasonal Fruits", "Raw Honey", "Potohar Peanuts"].map((cat) => (
-                              <a
+                              <Link
                                 key={cat}
-                                href="#products"
+                                href="/home/#products"
+                                onClick={(e) => {
+                                  const isHome =
+                                    window.location.pathname === "/home" ||
+                                    window.location.pathname === "/";
+                                  if (isHome) {
+                                    e.preventDefault();
+                                    const el = document.querySelector("#products");
+                                    if (el) {
+                                      const headerOffset = 90;
+                                      const elementPosition = el.getBoundingClientRect().top;
+                                      const offsetPosition =
+                                        elementPosition + window.scrollY - headerOffset;
+                                      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                                    }
+                                  }
+                                }}
                                 className="px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-stone-700 transition-colors hover:text-[#D97706] hover:bg-amber-50/70"
                               >
                                 {cat}
-                              </a>
+                              </Link>
                             ))}
                           </div>
                         </div>
@@ -341,34 +376,37 @@ function Header({ cartCount = 0, onCartClick }) {
             </div>
 
             {/* MOBILE ONLY: Live Kinetic Terroir Ribbon (Khali Pan Khatam Karne Ke Liye) */}
-            <div className="mt-2 pt-2 border-t border-stone-200/60 lg:hidden flex items-center justify-between gap-2 overflow-hidden">
-              <div className="flex items-center gap-1.5 shrink-0">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#D97706]" />
-                </span>
-                <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#B45309]">
-                  Live Harvest:
-                </span>
-              </div>
-
-              <div className="relative h-3.5 w-full overflow-hidden text-right">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeAnnounce}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.35 }}
-                    className="absolute inset-y-0 right-0 flex items-center"
-                  >
-                    <span className="text-[9.5px] font-bold uppercase tracking-wider text-stone-700 truncate">
-                      {ANNOUNCEMENTS[activeAnnounce]}
-                    </span>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
+           <div className="mt-2 pt-2 border-t border-stone-200/60 lg:hidden flex items-center gap-2 overflow-hidden">
+                         <div className="flex items-center gap-1.5 shrink-0">
+                           <span className="relative flex h-1.5 w-1.5">
+                             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#D97706]" />
+                           </span>
+                           <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#B45309]">
+                             Live:
+                           </span>
+                         </div>
+           
+                         <div className="relative h-4 w-full overflow-hidden">
+                           <AnimatePresence mode="wait">
+                             <motion.div
+                               key={activeAnnounce}
+                               initial={{ x: 10, opacity: 0 }}
+                               animate={{ x: -260, opacity: 1 }}
+                               exit={{ opacity: 0 }}
+                               transition={{
+                                 x: { delay: 1.5, duration: 5.2, ease: "linear" },
+                                 opacity: { duration: 0.35 },
+                               }}
+                               className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap will-change-transform"
+                             >
+                               <span className="eyebrow text-[#24120C] text-[0.65rem] font-bold uppercase tracking-wider select-none">
+                                 {ANNOUNCEMENTS[activeAnnounce]}
+                               </span>
+                             </motion.div>
+                           </AnimatePresence>
+                         </div>
+                       </div>
           </div>
 
           {/* Search Dropdown Drawer */}
@@ -401,6 +439,7 @@ function Header({ cartCount = 0, onCartClick }) {
           </AnimatePresence>
 
           {/* Full-Screen Editorial Mobile Curtain Menu */}
+         {/* Full-Screen Editorial Mobile Curtain Menu */}
           <AnimatePresence>
             {menuOpen && (
               <motion.nav
@@ -424,37 +463,60 @@ function Header({ cartCount = 0, onCartClick }) {
                 {/* Main Navigation Links */}
                 <div className="flex flex-col gap-5">
                   {[
-                    { num: "01", label: "Story", href: "#story", sub: "Three Generations of Craft" },
-                    { num: "02", label: "Products", href: "#products", sub: "Potohar & Gilgit Terroir" },
+                    { num: "01", label: "Story", href: "/home/#story", sub: "Three Generations of Craft" },
+                    { num: "02", label: "Products", href: "/home/#products", sub: "Potohar & Gilgit Terroir" },
                     { num: "03", label: "Contact", href: "/contact", sub: "Direct From Orchards" },
                   ].map((link, idx) => (
-                    <motion.a
+                    <motion.div
                       key={link.label}
-                      href={link.href}
-                      onClick={() => setMenuOpen(false)}
                       initial={{ opacity: 0, x: -15 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.05 + 0.05 }}
-                      className="group flex items-center justify-between border-b border-stone-100 pb-3"
                     >
-                      <div>
-                        <div className="flex items-baseline gap-2.5">
-                          <span className="text-xs font-mono font-bold text-[#D97706]">
-                            {link.num}
-                          </span>
-                          <span className="f-display text-2xl font-normal text-[#3B110B] group-hover:text-[#D97706] transition-colors">
-                            {link.label}
-                          </span>
+                      <Link
+                        href={link.href}
+                        onClick={(e) => {
+                          setMenuOpen(false);
+                          if (link.href.includes("#")) {
+                            const hash = "#" + link.href.split("#")[1];
+                            const isHome =
+                              window.location.pathname === "/home" ||
+                              window.location.pathname === "/";
+
+                            if (isHome) {
+                              e.preventDefault();
+                              const el = document.querySelector(hash);
+                              if (el) {
+                                const headerOffset = 90;
+                                const elementPosition = el.getBoundingClientRect().top;
+                                const offsetPosition =
+                                  elementPosition + window.scrollY - headerOffset;
+                                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                              }
+                            }
+                          }
+                        }}
+                        className="group flex items-center justify-between border-b border-stone-100 pb-3"
+                      >
+                        <div>
+                          <div className="flex items-baseline gap-2.5">
+                            <span className="text-xs font-mono font-bold text-[#D97706]">
+                              {link.num}
+                            </span>
+                            <span className="f-display text-2xl font-normal text-[#3B110B] group-hover:text-[#D97706] transition-colors">
+                              {link.label}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-stone-500 font-normal pl-6 mt-0.5">
+                            {link.sub}
+                          </p>
                         </div>
-                        <p className="text-[11px] text-stone-500 font-normal pl-6 mt-0.5">
-                          {link.sub}
-                        </p>
-                      </div>
-                      <ArrowUpRight
-                        size={16}
-                        className="text-stone-300 group-hover:text-[#D97706] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
-                      />
-                    </motion.a>
+                        <ArrowUpRight
+                          size={16}
+                          className="text-stone-300 group-hover:text-[#D97706] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+                        />
+                      </Link>
+                    </motion.div>
                   ))}
                 </div>
 
@@ -465,14 +527,14 @@ function Header({ cartCount = 0, onCartClick }) {
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {["Raw Honey", "Potohar Peanuts", "Hunza Apricots", "Honeycomb"].map((tag) => (
-                      <a
+                      <Link
                         key={tag}
-                        href="#products"
+                        href="/home/#products"
                         onClick={() => setMenuOpen(false)}
                         className="rounded-full bg-amber-50/80 border border-amber-200/80 px-3 py-1.5 text-[10.5px] font-bold text-[#5F2113] active:bg-[#D97706] active:text-white transition-colors"
                       >
                         {tag}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
