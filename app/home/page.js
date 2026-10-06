@@ -762,97 +762,375 @@ export default function FarooshSinglePage() {
           </motion.div>
         </div>
 
-        {/* ========================================================= */}
-        {/* 5. FARMS STORY SECTION (Parallax Transforms)              */}
-        {/* ========================================================= */}
-        {/* ========================================================= */}
-        {/* 5. FARMS STORY SECTION (Hydration-Safe Parallax)          */}
-        {/* ========================================================= */}
-        <section id="farms" ref={farmStoryRef} className="f-bg relative overflow-hidden px-6 py-8 md:px-12 md:py-10">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.02, margin: "0px 0px -50px 0px" }}
-            className="mx-auto max-w-[1400px]"
-          >
-            <motion.div variants={rise} className="max-w-2xl">
-              <span className="eyebrow f-accent">Faroosh Farms</span>
-              <h2 className="f-display mt-6 text-[clamp(2.6rem,5.5vw,5rem)] font-normal leading-[1.05]">
-                A harvest shaped by
-                <span className="f-earth italic"> altitude, soil, and patience.</span>
-              </h2>
-              <p className="f-muted mt-6 max-w-lg text-base font-normal leading-relaxed">
-                From three generations of rain-fed farming on the Potohar plateau to apiaries set high in the Gilgit and Hunza valleys, Faroosh brings authentic, unadulterated Pakistani goodness straight from the source to your doorstep.
-              </p>
+  
+      {/* ================================================================= */}
+        {/* 5. FARMS STORY SECTION (Ultra-Luxury Kinetic Terroir Showcase)    */}
+        {/* ================================================================= */}
+        <section
+          id="farms"
+          ref={farmStoryRef}
+          className="relative overflow-hidden bg-[#FAF7F2] px-4 py-16 sm:px-6 md:px-12 md:py-24 font-jakarta selection:bg-amber-500 selection:text-white"
+        >
+          {/* 1. Mathematical Ambient Optical Glows & Topographic Contours */}
+          <div className="absolute -top-32 -left-24 h-[550px] w-[550px] rounded-full bg-gradient-to-br from-amber-500/10 via-orange-400/5 to-transparent blur-[140px] pointer-events-none" />
+          <div className="absolute bottom-10 right-0 h-[600px] w-[600px] rounded-full bg-[#E11D48]/5 blur-[160px] pointer-events-none" />
+
+          {/* Mathematical Topographic Elevation Grid (Subtle Luxury Watermark) */}
+          <div className="absolute inset-0 opacity-[0.035] pointer-events-none select-none bg-[radial-gradient(#24120C_1px,transparent_1px)] [background-size:24px_24px]" />
+
+          <div className="mx-auto max-w-[1440px] relative z-10">
+            {/* Section Header with Terroir Coordinates & Kinetic Typography */}
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.1 }}
+              className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14 md:mb-20"
+            >
+              <div className="max-w-3xl">
+                {/* Micro Provenance Pill */}
+                <motion.div
+                  variants={rise}
+                  className="inline-flex items-center gap-2.5 rounded-full border border-amber-500/30 bg-amber-100/50 backdrop-blur-md px-4 py-1.5 mb-5 shadow-xs"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#D97706]" />
+                  </span>
+                  <span className="text-[10.5px] sm:text-xs font-bold uppercase tracking-[0.24em] text-[#92400E]">
+                    32.9328° N, 72.8549° E · Potohar & Gilgit Valleys
+                  </span>
+                </motion.div>
+
+                {/* Editorial Display Heading */}
+                <motion.h2
+                  variants={rise}
+                  className="f-display text-[clamp(2.3rem,5.6vw,4.8rem)] font-normal leading-[1.04] text-[#24120C] tracking-tight"
+                >
+                  A harvest shaped by{" "}
+                  <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#B45309] via-[#D97706] to-[#EA580C] italic font-serif">
+                    altitude, soil, & patience.
+                    <motion.span
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-400/80 via-orange-500/80 to-transparent origin-left pointer-events-none"
+                    />
+                  </span>
+                </motion.h2>
+              </div>
+
+              {/* Editorial Description Column */}
+              <motion.div variants={rise} className="max-w-md lg:pb-2">
+                <p className="text-stone-600 text-sm sm:text-base font-normal leading-relaxed">
+                  From three generations of rain-fed farming on the Potohar plateau to apiaries set high in the Gilgit and Hunza valleys, Faroosh preserves authentic, unadulterated Pakistani terroir from roots to your table.
+                </p>
+                <div className="mt-4 flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-amber-900/80">
+                  <span className="h-px w-8 bg-amber-500/60" />
+                  <span>Ancestral Direct Cultivation</span>
+                </div>
+              </motion.div>
             </motion.div>
 
-            <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8">
-              <motion.figure variants={rise} className="relative overflow-hidden md:col-span-7 md:row-span-2 rounded-xl">
-                <motion.div style={{ y: isMounted ? y1 : 0, scale: isMounted ? scale : 1 }} className="relative h-[52vh] w-full md:h-[76vh]">
-                  <Image src="/hero-farms.jpg" alt="Potohar Plateau Orchards" fill className="object-cover" />
-                </motion.div>
-                <figcaption
-                  className="absolute bottom-0 left-0 right-0 p-8"
-                  style={{
-                    background: "linear-gradient(to top, color-mix(in oklab, var(--earth-deep) 88%, transparent), transparent)",
-                    color: "var(--ivory)",
-                  }}
-                >
-                  <span className="eyebrow opacity-80">Potohar & Gilgit Origins</span>
-                  <p className="f-display mt-2 text-2xl md:text-3xl">Sun-cured fruits, raw combs, and rain-fed nuts</p>
-                </figcaption>
-              </motion.figure>
-
-              <motion.figure variants={rise} className="overflow-hidden md:col-span-5 rounded-xl">
-                <motion.div style={{ y: isMounted ? y2 : 0 }} className="relative h-[37vh] w-full">
-                  <Image src="/farms-honey.jpg" alt="Raw Honeycomb" fill className="object-cover" />
-                </motion.div>
-              </motion.figure>
-
-              <motion.blockquote
-                variants={rise}
-                className="f-sec f-border flex flex-col justify-between border rounded-xl p-8 md:col-span-5"
+            {/* Main Interactive Showcase Bento Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-7 items-stretch">
+              
+              {/* ============================================================== */}
+              {/* CARD 1: Large Immersion Canvas (Potohar Plateau Orchards)      */}
+              {/* ============================================================== */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                  const y = ((e.clientY - rect.top) / rect.height) * 100;
+                  e.currentTarget.style.setProperty("--mouse-x", `${x}%`);
+                  e.currentTarget.style.setProperty("--mouse-y", `${y}%`);
+                }}
+                className="group relative md:col-span-7 md:row-span-2 overflow-hidden rounded-[2rem] border border-amber-900/10 bg-[#1A0E0A] shadow-[0_20px_50px_-15px_rgba(36,18,12,0.12)] min-h-[460px] md:min-h-[720px] flex flex-col justify-between"
               >
-                <p className="f-display text-[clamp(1.6rem,2.2vw,2.2rem)] font-normal leading-snug">
-                  “We do not chase commercial yield. We wait for the soil and the climate to bring the fruit to its peak natural flavor.”
-                </p>
-                <footer className="eyebrow f-muted mt-6 font-semibold !whitespace-normal break-words text-[11px] tracking-normal sm:text-xs sm:tracking-widest">
-                  Ghulam Faroosh · Third Generation Producer
-                </footer>
+                {/* Interactive Dynamic Specular Lighting Tracker */}
+                <div
+                  className="absolute inset-0 pointer-events-none z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background:
+                      "radial-gradient(700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(253, 230, 138, 0.15), transparent 45%)",
+                  }}
+                />
+
+                {/* Parallax Image Canvas with Smooth Scale */}
+                <motion.div
+                  style={{ y: isMounted ? y1 : 0, scale: isMounted ? scale : 1.05 }}
+                  className="absolute inset-0 w-full h-full"
+                >
+                  <Image
+                    src="/hero-farms.jpg"
+                    alt="Potohar Plateau Orchards"
+                    fill
+                    priority
+                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105 filter brightness-[0.92]"
+                  />
+                  {/* Cinematic Film Vignette Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#150A06] via-[#150A06]/35 to-transparent" />
+                </motion.div>
+
+                {/* Top Floating Badge Bar */}
+                <div className="relative z-30 p-6 sm:p-8 flex items-center justify-between">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/20 px-3.5 py-1.5 text-white shadow-lg">
+                    <MapPin size={13} className="text-amber-400" />
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest">
+                      Chakwal Rain-Fed Estate
+                    </span>
+                  </div>
+
+                  {/* Rotating Artisan Seal Monogram */}
+                  <div className="relative h-16 w-16 sm:h-20 sm:w-20 select-none pointer-events-none hidden sm:block">
+                    <svg
+                      viewBox="0 0 100 100"
+                      className="h-full w-full animate-spin [animation-duration:16s] text-amber-200/80"
+                    >
+                      <path
+                        id="terroirCircle"
+                        d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"
+                        fill="none"
+                      />
+                      <text className="text-[8.8px] font-extrabold uppercase tracking-[0.24em] fill-current">
+                        <textPath href="#terroirCircle">
+                          • SINGLE ORIGIN • ANCESTRAL HARVEST •
+                        </textPath>
+                      </text>
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center text-amber-300">
+                      <Sparkles size={16} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Floating Glass Card */}
+                <div className="relative z-30 p-5 sm:p-8">
+                  <div className="rounded-2xl bg-black/45 backdrop-blur-2xl border border-white/20 p-5 sm:p-6 text-white shadow-2xl">
+                    <div className="flex items-center gap-2 text-amber-300 text-xs font-bold uppercase tracking-widest mb-1.5">
+                      <Leaf size={14} />
+                      <span>Natural Red Clay Terroir</span>
+                    </div>
+                    <h3 className="f-display text-2xl sm:text-3xl text-white font-normal leading-snug">
+                      Sun-cured fruits, raw combs, & rain-fed nuts
+                    </h3>
+                    <p className="mt-2 text-xs sm:text-sm text-stone-300/85 font-normal leading-relaxed">
+                      Nurtured purely by seasonal rainfall without canal flooding or commercial fertilizers, unlocking deeper natural aromatics.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* ============================================================== */}
+              {/* CARD 2: Wild Apiaries & Raw Honeycomb Card                     */}
+              {/* ============================================================== */}
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="group relative md:col-span-5 overflow-hidden rounded-[2rem] border border-amber-900/10 bg-white shadow-md hover:shadow-xl transition-all duration-300 min-h-[260px] sm:min-h-[290px] flex flex-col justify-end p-6"
+              >
+                <motion.div
+                  style={{ y: isMounted ? y2 : 0 }}
+                  className="absolute inset-0 w-full h-full"
+                >
+                  <Image
+                    src="/farms-honey.jpg"
+                    alt="Raw Mountain Honeycomb"
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                </motion.div>
+
+                {/* Live Micro Metric Overlay */}
+                <div className="relative z-10 text-white">
+                  <div className="inline-flex items-center gap-1.5 rounded-md bg-amber-500/20 backdrop-blur-md border border-amber-400/40 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-200 mb-2">
+                    <Sun size={11} className="text-amber-300" />
+                    <span>0% Sugar Feeding · Pure Wild Nectar</span>
+                  </div>
+                  <h4 className="f-display text-2xl text-white font-normal">
+                    Gilgit Wild Flora Apiaries
+                  </h4>
+                  <p className="text-xs text-stone-300/85 mt-1 font-normal">
+                    Harvested at 3,000m altitude from untouched thyme and alpine blooms.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* ============================================================== */}
+              {/* CARD 3: Master Artisan Sanctuary Quote Card                   */}
+              {/* ============================================================== */}
+              <motion.blockquote
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative md:col-span-5 overflow-hidden rounded-[2rem] border border-amber-300/70 bg-gradient-to-br from-[#FFFDF9] via-[#FAF5EC] to-[#F5ECE0] p-6 sm:p-8 flex flex-col justify-between shadow-[0_8px_30px_rgba(217,119,6,0.06)] hover:shadow-[0_16px_40px_rgba(217,119,6,0.12)] transition-all duration-300 group"
+              >
+                {/* Subtle Luxury Watermark Graphic */}
+                <span className="absolute -bottom-6 -right-3 text-8xl font-serif text-amber-900/[0.04] select-none pointer-events-none group-hover:text-amber-900/[0.07] transition-colors">
+                  “
+                </span>
+
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#B45309]">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      Generational Creed
+                    </span>
+                    <ShieldCheck size={18} className="text-[#D97706]" />
+                  </div>
+
+                  <p className="f-display text-xl sm:text-2xl md:text-[1.55rem] font-normal text-[#24120C] leading-snug">
+                    “We do not chase commercial yield. We wait for the soil and the mountain climate to bring each harvest to its peak physiological flavor.”
+                  </p>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-amber-900/10 flex items-center justify-between">
+                  <div>
+                    <h5 className="text-xs sm:text-sm font-bold text-[#24120C] tracking-tight">
+                      Ghulam Faroosh
+                    </h5>
+                    <p className="text-[10px] sm:text-[11px] font-medium text-stone-500 uppercase tracking-wider">
+                      Third Generation Grower
+                    </p>
+                  </div>
+                  <span className="text-[11px] font-bold text-amber-700 bg-amber-100/80 px-2.5 py-1 rounded-full">
+                    Est. Potohar
+                  </span>
+                </div>
               </motion.blockquote>
 
-              <motion.figure variants={rise} className="overflow-hidden md:col-span-5 rounded-xl">
-                <div className="relative h-[32vh] w-full">
-                  <Image src="/farms-dryfruit.jpg" alt="Sun-dried Organic Apricots" fill className="object-cover transition-transform duration-[1.2s] hover:scale-105" />
-                </div>
-              </motion.figure>
-
+              {/* ============================================================== */}
+              {/* CARD 4: Sun-Dried Organic Apricots (Interactive Stone Terraces)*/}
+              {/* ============================================================== */}
               <motion.div
-                variants={rise}
-                className="f-border grid grid-cols-1 gap-px overflow-hidden border sm:grid-cols-3 md:col-span-7 rounded-xl"
-                style={{ background: "var(--border)" }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                className="group relative md:col-span-5 overflow-hidden rounded-[2rem] border border-amber-900/10 bg-black min-h-[250px] flex flex-col justify-end p-6 shadow-md"
+              >
+                <Image
+                  src="/farms-dryfruit.jpg"
+                  alt="Sun-dried Organic Apricots"
+                  fill
+                  className="object-cover transition-transform duration-1000 ease-out group-hover:scale-108 filter brightness-[0.9]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+
+                <div className="relative z-10 text-white">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#FDE68A]">
+                    Hunza Valley Stone Terraces
+                  </span>
+                  <h4 className="f-display text-2xl text-white font-normal mt-0.5">
+                    Sun-Cured River Stones
+                  </h4>
+                  <p className="text-xs text-stone-300 mt-1">
+                    Cured under natural mountain rays with zero chemical sulfites.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* ============================================================== */}
+              {/* CARD 5: 3-Pillar Origin Bar (Interactive Kinetic Capsules)      */}
+              {/* ============================================================== */}
+           {/* ============================================================== */}
+              {/* CARD 5: 3-Pillar Origin Bar (Zero-Jitter GPU Hardware-Accelerated) */}
+              {/* ============================================================== */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.15 }}
+                className="md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3"
               >
                 {[
-                  { icon: MapPin, k: "Origin", v: "Potohar Plateau & Gilgit Valleys" },
-                  { icon: Sun, k: "Method", v: "Sun-cured, 100% unheated" },
-                  { icon: Leaf, k: "Standard", v: "Authentic, small-batch harvest" },
-                ].map(({ icon: Icon, k, v }) => (
-                  <div key={k} className="f-bg p-8">
-                    <Icon size={20} strokeWidth={1.5} className="f-accent" />
-                    <p className="eyebrow f-muted mt-6 font-semibold">{k}</p>
-                    <p className="f-display mt-2 text-2xl leading-tight">{v}</p>
-                  </div>
-                ))}
+                  {
+                    icon: MapPin,
+                    label: "Terroir Origin",
+                    title: "Potohar & Gilgit",
+                    detail: "Native Micro-Climates",
+                    color: "text-amber-600",
+                    badge: "Single-Source",
+                  },
+                  {
+                    icon: Sun,
+                    label: "Craft Method",
+                    title: "Sun-Cured & Raw",
+                    detail: "100% Unheated Cold-Poured",
+                    color: "text-orange-500",
+                    badge: "Ancestral",
+                  },
+                  {
+                    icon: Leaf,
+                    label: "Integrity Standard",
+                    title: "Small-Batch Audit",
+                    detail: "Zero Synthetic Sprays",
+                    color: "text-emerald-600",
+                    badge: "Pure Terroir",
+                  },
+                ].map((pillar) => {
+                  const PillarIcon = pillar.icon;
+                  return (
+                    <motion.div
+                      key={pillar.label}
+                      whileHover={{ y: -3 }}
+                      transition={{ duration: 0.12, ease: "easeOut" }}
+                      style={{
+                        transform: "translateZ(0)",
+                        backfaceVisibility: "hidden",
+                        WebkitFontSmoothing: "subpixel-antialiased",
+                      }}
+                      className="group relative flex flex-col justify-between rounded-2xl bg-white border border-stone-200/90 hover:border-amber-400/80 p-5 shadow-xs hover:shadow-[0_12px_28px_-6px_rgba(217,119,6,0.14)] transition-colors duration-150 transform-gpu overflow-hidden cursor-default"
+                    >
+                      {/* Top Specular Gold Shine Bar */}
+                      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-amber-400/0 group-hover:via-amber-400/80 to-transparent transition-opacity duration-150 opacity-0 group-hover:opacity-100 pointer-events-none" />
+
+                      <div>
+                        {/* Header Row: Icon & Badge */}
+                        <div className="flex items-center justify-between mb-3.5">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 group-hover:bg-[#E11D48] transition-colors duration-150 text-amber-700 group-hover:text-white shadow-xs">
+                            <PillarIcon size={17} strokeWidth={2.2} />
+                          </div>
+                          <span className="text-[9.5px] font-bold uppercase tracking-wider text-stone-400 group-hover:text-amber-600 transition-colors duration-150 whitespace-nowrap">
+                            {pillar.badge}
+                          </span>
+                        </div>
+
+                        {/* Eyebrow Label */}
+                        <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#B45309] block">
+                          {pillar.label}
+                        </span>
+
+                        {/* Card Title */}
+                        <h4 className="text-base sm:text-lg font-bold text-[#24120C] mt-0.5 tracking-tight group-hover:text-[#D97706] transition-colors duration-150 whitespace-nowrap">
+                          {pillar.title}
+                        </h4>
+                      </div>
+
+                      {/* Detail Subtitle */}
+                      <p className="text-[11px] text-stone-500 mt-2.5 font-medium leading-normal whitespace-nowrap">
+                        {pillar.detail}
+                      </p>
+                    </motion.div>
+                  );
+                })}
               </motion.div>
+
             </div>
-          </motion.div>
+          </div>
         </section>
 
 
-      
-        {/* 6. SOURCING PROCESS FLOW SECTION (Fast & Solid Jakarta UI)*/}
-        {/* ========================================================= */}
         {/* ========================================================= */}
         {/* 6. SOURCING PROCESS FLOW SECTION (Sequential Kinetic Deck)*/}
         {/* ========================================================= */}
