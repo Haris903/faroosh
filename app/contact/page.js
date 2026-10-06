@@ -138,63 +138,231 @@ function Header({ cartCount = 0, onCartClick }) {
 
   return (
     <>
-      <motion.header
-        initial={false}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9, ease: EASE }}
-        className={`glass-nav fixed inset-x-0 top-0 z-[99999] isolate transition-all duration-500 ${
-          scrolled ? "py-3" : "py-4"
-        }`}
-      >
-        <div className="mx-auto grid w-full max-w-[1600px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 md:px-10">
-          
-          {/* Logo */}
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setMenuOpen((v) => !v)}
-              className="p-1 lg:hidden cursor-pointer touch-manipulation text-[#3B110B]"
-            >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-            <Link href="/" className="text-left leading-none">
-              <div className="img flex flex-col h-full items-center text-center group cursor-pointer">
-                <Image
-                  width={30}
-                  height={30}
-                  src="/faroosh.png"
-                  alt="Faroosh Logo"
-                  className="transition-transform duration-[0.8s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:-translate-y-1"
-                />
-                <p className="text-[#CAA387] font-sans text-sm mt-1 transition-colors duration-500 group-hover:text-[#D97706]">
-                  Faroosh
-                </p>
+        <motion.header
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: EASE }}
+          className={`fixed inset-x-0 top-0 z-[99999] isolate transition-all duration-500 font-jakarta ${
+            scrolled
+              ? "py-2 sm:py-2.5 px-3 sm:px-6 md:px-5"
+              : "py-3 sm:py-4 px-4 sm:px-8 md:px-12"
+          }`}
+        >
+          {/* Main Floating Glass Island */}
+          <div
+            className={`mx-auto max-w-[1520px] transition-all duration-500 rounded-2xl md:rounded-full border ${
+              scrolled
+                ? "bg-[#FFFDF8]/85 backdrop-blur-2xl shadow-[0_12px_40px_-10px_rgba(36,18,12,0.12)] border-[#D97706]/25 px-4 sm:px-6 py-2.5"
+                : "bg-white/70 backdrop-blur-xl border-white/60 shadow-xs px-4 sm:px-6 py-2.5 sm:py-3"
+            }`}
+          >
+            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-6">
+              
+              {/* LEFT: Mobile Menu Button & Brand Monogram */}
+              <div className="flex items-center gap-3 sm:gap-4">
+                {/* Tactical Minimalist Mobile Trigger */}
+                <button
+                  type="button"
+                  onClick={() => setMenuOpen((v) => !v)}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-300/80 bg-white/80 text-[#3B110B] lg:hidden cursor-pointer touch-manipulation hover:border-[#D97706] transition-colors"
+                  aria-label="Toggle Navigation"
+                >
+                  <AnimatePresence mode="wait">
+                    {menuOpen ? (
+                      <motion.div
+                        key="close"
+                        initial={{ rotate: -90, opacity: 0 }}
+                        animate={{ rotate: 0, opacity: 1 }}
+                        exit={{ rotate: 90, opacity: 0 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        <X size={18} strokeWidth={2} />
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="menu"
+                        initial={{ rotate: 90, opacity: 0 }}
+                        animate={{ rotate: 0, opacity: 1 }}
+                        exit={{ rotate: -90, opacity: 0 }}
+                        transition={{ duration: 0.15 }}
+                        className="flex flex-col gap-1 items-center justify-center"
+                      >
+                        <span className="h-[1.5px] w-4 bg-[#3B110B] rounded-full" />
+                        <span className="h-[1.5px] w-3 bg-[#D97706] rounded-full self-start ml-0.5" />
+                        <span className="h-[1.5px] w-4 bg-[#3B110B] rounded-full" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
+
+                {/* Brand Identity Seal */}
+                <Link href="/" className="group flex items-center gap-2.5 cursor-pointer">
+                  <div className="relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] border border-[#F59E0B]/40 shadow-xs transition-transform duration-300 group-hover:scale-105">
+                    <Image
+                      src="/faroosh.png"
+                      alt="Faroosh Logo"
+                      width={22}
+                      height={22}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="flex flex-col leading-none">
+                    <span className="f-display text-lg sm:text-xl font-medium tracking-tight text-[#3B110B] group-hover:text-[#D97706] transition-colors">
+                      Faroosh
+                    </span>
+                    <span className="text-[8px] sm:text-[8.5px] font-bold uppercase tracking-[0.24em] text-[#CAA387]">
+                      Farms
+                    </span>
+                  </div>
+                </Link>
               </div>
-            </Link>
-          </div>
 
-          {/* Live Ticker (Seamless Luxury Pill - Zero Black Border) */}
-          <div className="hidden justify-center md:flex">
-            <div className="flex items-center gap-2.5 rounded-full bg-[#EFECE6]/90 drop-shadow-sm px-4 py-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.03)] border border-[#E2DDD3]/70 backdrop-blur-sm">
-              <span className="relative flex h-2 w-2 shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#059669]" />
-              </span>
+              {/* CENTER: Desktop Live Ticker Bulletin */}
+              <div className="hidden lg:flex justify-center">
+                <div className="flex items-center gap-3 rounded-full border border-stone-200/80 bg-white/70 px-4 py-1.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] backdrop-blur-md">
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" />
+                  </span>
 
-              <div className="relative h-4 w-[260px] overflow-hidden lg:w-[320px]">
+                  <div className="relative h-4 w-[280px] xl:w-[340px] overflow-hidden">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activeAnnounce}
+                        initial={{ y: 12, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -12, opacity: 0 }}
+                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap"
+                      >
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#3B110B] font-jakarta select-none">
+                          {ANNOUNCEMENTS[activeAnnounce]}
+                        </span>
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+
+              {/* RIGHT: Desktop Nav & Action Suite */}
+              <div className="flex items-center justify-end gap-3 sm:gap-6">
+                
+                {/* Desktop Editorial Navigation Links */}
+                <nav className="hidden lg:flex items-center gap-7">
+                  {NAV_LINKS.map((link) => (
+                    <div key={link.label} className="group relative">
+                      <a
+                        href={link.href}
+                        onClick={(e) => {
+                          const targetStr = link.href.replace("/", "");
+                          const el = document.querySelector(targetStr);
+                          if (el) {
+                            e.preventDefault();
+                            el.scrollIntoView({ behavior: "smooth" });
+                          }
+                        }}
+                        className="relative flex items-center gap-1.5 py-1 text-xs font-bold tracking-[0.2em] uppercase text-stone-700 transition-colors duration-200 hover:text-[#D97706] cursor-pointer"
+                      >
+                        <span>{link.label}</span>
+
+                        {link.label === "Products" && (
+                          <svg
+                            className="w-3 h-3 origin-center transition-transform duration-300 ease-out group-hover:rotate-180 text-stone-500 group-hover:text-[#D97706]"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
+                          >
+                            <path d="m6 9 6 6 6-6" />
+                          </svg>
+                        )}
+
+                        {/* Gold Underline Sweep */}
+                        <span className="absolute -bottom-0.5 left-0 w-full h-[1.5px] bg-[#D97706] origin-right scale-x-0 transition-transform duration-300 ease-out group-hover:origin-left group-hover:scale-x-100" />
+                      </a>
+
+                      {/* Dropdown Menu */}
+                      {link.label === "Products" && (
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 z-50 opacity-0 invisible translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto">
+                          <div className="flex flex-col bg-white/95 backdrop-blur-2xl border border-amber-200/80 shadow-[0_14px_35px_-5px_rgba(0,0,0,0.12)] rounded-2xl py-2 w-52 overflow-hidden">
+                            {["Dry Fruits", "Seasonal Fruits", "Raw Honey", "Potohar Peanuts"].map((cat) => (
+                              <a
+                                key={cat}
+                                href="#products"
+                                className="px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-stone-700 transition-colors hover:text-[#D97706] hover:bg-amber-50/70"
+                              >
+                                {cat}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </nav>
+
+                <div className="h-4 w-[1px] bg-stone-300 hidden lg:block" />
+
+                {/* Interactive Action Badges */}
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  
+                  {/* Search Icon Trigger */}
+                
+
+                  {/* Profile (Desktop Only) */}
+                 
+
+                  {/* Cart Basket Button with Amber Glow Count */}
+                  <button
+                    type="button"
+                    onClick={() => setCartOpen(true)}
+                    className="group relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-stone-200/80 bg-white/70 hover:bg-white text-stone-700 hover:text-[#D97706] shadow-2xs transition-all cursor-pointer"
+                    aria-label="View Shopping Basket"
+                  >
+                    <ShoppingBag size={16} strokeWidth={2} />
+                    <AnimatePresence>
+                      {cart.length > 0 && (
+                        <motion.span
+                          key={cart.length}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          exit={{ scale: 0 }}
+                          className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-[#E11D48] px-1 text-[9px] font-bold text-white shadow-sm"
+                        >
+                          {cart.length}
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* MOBILE ONLY: Live Kinetic Terroir Ribbon (Khali Pan Khatam Karne Ke Liye) */}
+            <div className="mt-2 pt-2 border-t border-stone-200/60 lg:hidden flex items-center justify-between gap-2 overflow-hidden">
+              <div className="flex items-center gap-1.5 shrink-0">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#D97706]" />
+                </span>
+                <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#B45309]">
+                  Live Harvest:
+                </span>
+              </div>
+
+              <div className="relative h-3.5 w-full overflow-hidden text-right">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeAnnounce}
-                    initial={{ x: 15, opacity: 0 }}
-                    animate={{ x: -220, opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      x: { delay: 1.8, duration: 4.8, ease: "linear" },
-                      opacity: { duration: 0.4 },
-                    }}
-                    className="absolute inset-y-0 left-0 flex items-center whitespace-nowrap will-change-transform"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.35 }}
+                    className="absolute inset-y-0 right-0 flex items-center"
                   >
-                    <span className="eyebrow text-[#24120C] text-[0.68rem] font-bold uppercase tracking-[0.22em] select-none">
+                    <span className="text-[9.5px] font-bold uppercase tracking-wider text-stone-700 truncate">
                       {ANNOUNCEMENTS[activeAnnounce]}
                     </span>
                   </motion.div>
@@ -203,177 +371,132 @@ function Header({ cartCount = 0, onCartClick }) {
             </div>
           </div>
 
-          {/* Nav Links & Action Icons */}
-          <div className="flex items-center justify-end gap-5 md:gap-9">
-            {/* Desktop Navigation Links */}
-            <nav className="hidden items-center gap-8 lg:flex">
-              {NAV_LINKS.map((link) => (
-                <div key={link.label} className="group relative">
-                  <Link
-                    href={link.href}
-                    className="relative flex items-center gap-1.5 justify-center eyebrow cursor-pointer font-bold tracking-widest py-2 text-[var(--muted-fg)] transition-colors duration-[0.4s] group-hover:text-[#D97706]"
+          {/* Search Dropdown Drawer */}
+          <AnimatePresence>
+            {searchOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease: EASE }}
+                className="overflow-hidden mx-auto max-w-[1520px] mt-2 rounded-2xl bg-white/95 backdrop-blur-2xl border border-amber-200/70 shadow-xl"
+              >
+                <div className="px-6 py-4 flex items-center gap-3">
+                  <Search size={18} className="text-[#D97706] shrink-0" />
+                  <input
+                    autoFocus
+                    placeholder="Search raw honey, Potohar peanuts, swatted apricots…"
+                    className="w-full bg-transparent text-sm sm:text-base font-medium outline-none placeholder:text-stone-400 text-[#3B110B] font-jakarta"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setSearchOpen(false)}
+                    className="text-stone-400 hover:text-stone-700 p-1"
                   >
-                    <span>{link.label}</span>
-
-                    {/* Arrow Icon: Rotates 180° instantly on hover without jitter */}
-                    {link.label === "Products" && (
-                      <span className="relative inline-flex items-center justify-center w-4 h-4 shrink-0 pointer-events-none select-none">
-                        <svg
-                          className="w-3.5 h-3.5 origin-center transition-transform duration-300 ease-out group-hover:rotate-180 transform-gpu [backface-visibility:hidden]"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth={2.5}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="m6 9 6 6 6-6" />
-                        </svg>
-                      </span>
-                    )}
-
-                    {/* Golden Sweep Line */}
-                    <span className="absolute -bottom-0.5 left-0 w-full h-[2px] bg-gradient-to-r from-[#E11D48] via-[#EA580C] to-[#D97706] origin-right scale-x-0 transition-transform duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:origin-left group-hover:scale-x-100" />
-                  </Link>
-
-                  {/* Dropdown Menu: Opens on hover with smooth fade & lift */}
-                  {link.label === "Products" && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-300 z-50 opacity-0 invisible translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto">
-                      <div className="flex flex-col bg-white/95 backdrop-blur-md border border-[#FDE68A] shadow-[0_10px_30px_rgba(0,0,0,0.1)] rounded-xl py-2 w-48 overflow-hidden">
-                        {["Dry Fruits", "Seasonal Fruits", "Raw Honey", "Potohar Peanuts"].map((cat) => (
-                          <a
-                            key={cat}
-                            href="/#products"
-                            className="eyebrow px-5 py-3 text-[10.5px] text-stone-600 transition-colors hover:text-[#D97706] hover:bg-amber-50/80"
-                          >
-                            {cat}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                    <X size={16} />
+                  </button>
                 </div>
-              ))}
-            </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-            {/* Action Buttons (Search, Profile, Basket) */}
-            <div className="flex items-center gap-5">
-              {/* Search Toggle Button */}
-              <button
-                type="button"
-                onClick={() => setSearchOpen((v) => !v)}
-                className="group relative cursor-pointer touch-manipulation p-1"
-                aria-label="Search"
+          {/* Full-Screen Editorial Mobile Curtain Menu */}
+          <AnimatePresence>
+            {menuOpen && (
+              <motion.nav
+                initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="lg:hidden mx-auto max-w-[1520px] mt-2 overflow-hidden rounded-3xl bg-[#FFFDF9]/98 backdrop-blur-3xl border border-amber-300/60 shadow-[0_20px_50px_rgba(0,0,0,0.15)] p-6"
               >
-                <svg
-                  className="w-[19px] h-[19px] text-[#3B110B] transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:text-[#D97706]"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.75}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
-                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#D97706] opacity-0 scale-0 transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100" />
-              </button>
+                {/* Header Tag */}
+                <div className="flex items-center justify-between border-b border-stone-200/80 pb-3 mb-6">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#B45309]">
+                    Faroosh Directory
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-[9.5px] font-bold uppercase text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    Autumn Harvest
+                  </span>
+                </div>
 
-              {/* User Profile Button */}
-              <button
-                type="button"
-                className="hidden sm:block group relative cursor-pointer touch-manipulation p-1"
-                aria-label="Profile"
-              >
-                <User
-                  size={19}
-                  strokeWidth={1.5}
-                  className="text-[#3B110B] transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:text-[#D97706]"
-                />
-                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#D97706] opacity-0 scale-0 transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100" />
-              </button>
-
-              {/* Cart Drawer Trigger */}
-              <button
-                type="button"
-                onClick={handleCartOpen}
-                className="group relative cursor-pointer touch-manipulation p-1"
-                aria-label="Cart"
-              >
-                <ShoppingBag
-                  size={19}
-                  strokeWidth={1.5}
-                  className="text-[#3B110B] transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:text-[#D97706]"
-                />
-                <AnimatePresence>
-                  {(cart.length > 0 || cartCount > 0) && (
-                    <motion.span
-                      key={cart.length || cartCount}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      style={{ background: "var(--gold)", color: "var(--earth-deep)" }}
-                      className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full px-1 text-[0.6rem] font-bold shadow-sm"
+                {/* Main Navigation Links */}
+                <div className="flex flex-col gap-5">
+                  {[
+                    { num: "01", label: "Story", href: "#story", sub: "Three Generations of Craft" },
+                    { num: "02", label: "Products", href: "#products", sub: "Potohar & Gilgit Terroir" },
+                    { num: "03", label: "Contact", href: "/contact", sub: "Direct From Orchards" },
+                  ].map((link, idx) => (
+                    <motion.a
+                      key={link.label}
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      initial={{ opacity: 0, x: -15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.05 + 0.05 }}
+                      className="group flex items-center justify-between border-b border-stone-100 pb-3"
                     >
-                      {cart.length || cartCount}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-                {cart.length === 0 && cartCount === 0 && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#D97706] opacity-0 scale-0 transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100" />
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+                      <div>
+                        <div className="flex items-baseline gap-2.5">
+                          <span className="text-xs font-mono font-bold text-[#D97706]">
+                            {link.num}
+                          </span>
+                          <span className="f-display text-2xl font-normal text-[#3B110B] group-hover:text-[#D97706] transition-colors">
+                            {link.label}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-stone-500 font-normal pl-6 mt-0.5">
+                          {link.sub}
+                        </p>
+                      </div>
+                      <ArrowUpRight
+                        size={16}
+                        className="text-stone-300 group-hover:text-[#D97706] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+                      />
+                    </motion.a>
+                  ))}
+                </div>
 
-        {/* Search Dropdown Drawer */}
-        <AnimatePresence>
-          {searchOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.45, ease: EASE }}
-              className="overflow-hidden bg-white/95"
-            >
-              <div className="mx-auto max-w-[1600px] px-5 pb-4 pt-5 md:px-10">
-                <input
-                  autoFocus
-                  placeholder="Search raw honey, dry fruits, Potohar peanuts…"
-                  className="f-display f-border w-full border-b bg-transparent pb-3 text-2xl outline-none placeholder:text-stone-400 text-[#3B110B]"
-                />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                {/* Quick Harvest Category Pills */}
+                <div className="mt-6 pt-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block mb-3">
+                    Quick Selection
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {["Raw Honey", "Potohar Peanuts", "Hunza Apricots", "Honeycomb"].map((tag) => (
+                      <a
+                        key={tag}
+                        href="#products"
+                        onClick={() => setMenuOpen(false)}
+                        className="rounded-full bg-amber-50/80 border border-amber-200/80 px-3 py-1.5 text-[10.5px] font-bold text-[#5F2113] active:bg-[#D97706] active:text-white transition-colors"
+                      >
+                        {tag}
+                      </a>
+                    ))}
+                  </div>
+                </div>
 
-        {/* Mobile Navigation Drawer */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.nav
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden bg-white/95 lg:hidden mt-2"
-            >
-              <div className="flex flex-col gap-5 px-6 pb-8 pt-6">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="eyebrow f-ink text-sm font-semibold cursor-pointer touch-manipulation"
+                {/* Direct Concierge Footer */}
+                <div className="mt-6 pt-4 border-t border-stone-200/80 flex items-center justify-between">
+                  <a
+                    href="https://api.whatsapp.com/send?phone=923710506436"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-xs font-bold text-[#E11D48] tracking-wider uppercase font-jakarta"
                   >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </motion.nav>
-          )}
-        </AnimatePresence>
-      </motion.header>
+                    <span>Talk Directly on WhatsApp</span>
+                    <ArrowUpRight size={13} />
+                  </a>
+
+                  <span className="text-[9px] font-semibold text-stone-400">
+                    Pothohar Base
+                  </span>
+                </div>
+              </motion.nav>
+            )}
+          </AnimatePresence>
+        </motion.header>
 
       {/* Cart Drawer Modal (Directly Embedded in page2.js) */}
       <AnimatePresence>
